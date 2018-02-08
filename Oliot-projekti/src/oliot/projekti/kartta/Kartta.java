@@ -1,8 +1,10 @@
-package oliot.projekti;
+package oliot.projekti.kartta;
 
 public class Kartta {
     private int korkeus;
     private int leveys;
+    private int huoneidenMaara;
+    private IntRange huoneidenKoko;
 
     public Kartta(int korkeus, int leveys) {
         this.korkeus = korkeus;
@@ -24,5 +26,6 @@ public class Kartta {
     public void setLeveys(int leveys) {
         this.leveys = leveys;
     }
+
     
 }
