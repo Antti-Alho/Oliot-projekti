@@ -29,33 +29,26 @@ public class Display extends JPanel {
             super.paintComponent(g);
             setBackground(Color.white);
             
-        int rivi = 50;
-            int leveys = 50;
+        int x = 50;
+            int y = 50;
             
             
         for (int i = 0; i < ruudut.size(); i++) {
             Ruutu[]get=ruudut.get(i);
             for (int j = 0; j < get.length; j++) {
+                if(get[j].isSeinä())  {
                 g.setColor(Color.black);
-                g.fillRect(rivi, leveys, 25, 25);
-                 
+                g.fillRect(x, y, 25, 25);
+                }
+                x = x+25;
             }
-            rivi = rivi+25;
+            x = 50;
+            y = y+25;
+            
             
             
         }
-        int riviA = 50;
-            int leveysA = 50;
-            
-        for (int i = 0; i < ruudut.size(); i++) {
-            Ruutu[]get=ruudut.get(i);
-            for (int j = 0; j < get.length; j++) {
-                g.setColor(Color.black);
-                g.fillRect(riviA, leveysA, 25, 25);
-                
-            }    
-               leveysA=leveysA + 25;
-        }
+        
     }
     
     
