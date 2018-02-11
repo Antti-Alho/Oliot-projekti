@@ -15,7 +15,20 @@ public class Kartta {
         this.koordinaatisto = new ArrayList<>();
     }
     
-    private ArrayList<Ruutu[]> getKartta(){
+    private ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
+        for (int i = 0; i < korkeus; i++) {
+            Ruutu[] ruudut = new Ruutu[leveys];
+            for (int j = 0; j < ruudut.length; j++) {
+                if (j == 0){
+                    ruudut[j] = new Ruutu(i, j, true);
+                } else if (j != 0 && j< ruudut.length){
+                    ruudut[j] = new Ruutu(i, j, false);
+                } else {
+                    ruudut[j] = new Ruutu(i, j, true);
+                }
+            }
+            koordinaatisto.add(ruudut);
+        }
         return this.koordinaatisto;
     }
     
