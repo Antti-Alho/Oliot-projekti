@@ -9,10 +9,20 @@ public class Kartta {
     private IntRange huoneidenKoko;
     private ArrayList<Ruutu[]> koordinaatisto;
 
-    public Kartta(int korkeus, int leveys) {
+    public Kartta(int korkeus, int leveys, int maara, int kokoMin, int kokoMax) {
         this.korkeus = korkeus;
         this.leveys = leveys;
+        this.huoneidenMaara = maara;
+        this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList<>();
+    }
+    public Kartta() {
+        
+    }
+    
+    private ArrayList<Ruutu[]> luoKartta(){
+        
+        return this.koordinaatisto;
     }
     
     private ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
