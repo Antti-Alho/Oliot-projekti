@@ -19,12 +19,16 @@ public class Kartta {
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
             for (int j = 0; j < ruudut.length; j++) {
-                if (j == 0){
+                if (i == 0 || i == korkeus){
                     ruudut[j] = new Ruutu(i, j, true);
-                } else if (j != 0 && j< ruudut.length){
-                    ruudut[j] = new Ruutu(i, j, false);
                 } else {
-                    ruudut[j] = new Ruutu(i, j, true);
+                    if (j == 0){
+                        ruudut[j] = new Ruutu(i, j, true);
+                    } else if (j != 0 && j< ruudut.length){
+                        ruudut[j] = new Ruutu(i, j, false);
+                    } else {
+                        ruudut[j] = new Ruutu(i, j, true);
+                    }
                 }
             }
             koordinaatisto.add(ruudut);
