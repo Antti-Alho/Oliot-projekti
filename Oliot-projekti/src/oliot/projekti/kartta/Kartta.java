@@ -7,17 +7,18 @@ public class Kartta {
     private int leveys;
     private int huoneidenMaara;
     private IntRange huoneidenKoko;
+    private ArrayList<Ruutu[]> koordinaatisto;
 
     public Kartta(int korkeus, int leveys) {
         this.korkeus = korkeus;
         this.leveys = leveys;
-        ArrayList<Ruutu> koorninaatisto = new ArrayList<>();
+        this.koordinaatisto = new ArrayList<>();
     }
     
-    private void start(){
-        
+    private ArrayList<Ruutu[]> getKartta(){
+        return this.koordinaatisto;
     }
-
+    
     public int getKorkeus() {
         return korkeus;
     }
