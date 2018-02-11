@@ -17,15 +17,18 @@ public class Kartta {
         this.koordinaatisto = new ArrayList<>();
     }
     public Kartta() {
-        
+        this.koordinaatisto = new ArrayList<>();
     }
     
-    private ArrayList<Ruutu[]> luoKartta(){
+    
+    //luo kartan
+    public ArrayList<Ruutu[]> luoKartta(){
         
         return this.koordinaatisto;
     }
     
-    private ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
+    //luo yhden huoneen jolla testataan muuta toiminnallisuutta!
+    public ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
             for (int j = 0; j < ruudut.length; j++) {
@@ -60,6 +63,21 @@ public class Kartta {
 
     public void setLeveys(int leveys) {
         this.leveys = leveys;
+    }
+    
+    @Override
+    public String toString(){
+        String a = "";
+        
+        for (Ruutu[] ruutus : koordinaatisto) {
+            for (Ruutu ruutu : ruutus) {
+                a = a+ruutu.toString();
+            }
+            a = a + System.lineSeparator();
+        }
+        
+        return a;
+        
     }
 
     

@@ -93,5 +93,14 @@ public class Ruutu {
         this.naapuriE = naapuriE;
     }
     
+    @Override
+    public String toString(){
+        if (seinä){
+            return "#";
+        } else {
+            return "_";
+        }
+    }
+    
     
 }
