@@ -14,6 +14,7 @@ public class Ruutu {
     public Ruutu naapuriS;
     public Ruutu naapuriW;
     public Ruutu naapuriE;
+    
 
     public Ruutu(int x, int y, boolean seinä) {
         this.x = x;

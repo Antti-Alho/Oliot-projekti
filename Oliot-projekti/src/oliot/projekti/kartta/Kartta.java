@@ -3,41 +3,45 @@ package oliot.projekti.kartta;
 import java.util.ArrayList;
 
 public class Kartta {
-    private int korkeus;
-    private int leveys;
+
     private int huoneidenMaara;
     private IntRange huoneidenKoko;
     private ArrayList<Ruutu[]> koordinaatisto;
 
-    public Kartta(int korkeus, int leveys, int maara, int kokoMin, int kokoMax) {
-        this.korkeus = korkeus;
-        this.leveys = leveys;
+    public Kartta(int maara, int kokoMin, int kokoMax) {
+
         this.huoneidenMaara = maara;
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList<>();
     }
     public Kartta() {
         this.koordinaatisto = new ArrayList<>();
+        for (int i = 0; i < huoneidenMaara; i++) {
+            Room room = new Room(huoneidenKoko.huoneenKoko(), huoneidenKoko.huoneenKoko());
+            
+        }
+        
     }
     
     
-    //luo kartan
-    public ArrayList<Ruutu[]> luoKartta(){
+    //täyttää ja palauttaa koordinaatiston 
+    public ArrayList<Ruutu[]> getKoordinaatisto(){
         
         return this.koordinaatisto;
     }
     
     //luo yhden huoneen jolla testataan muuta toiminnallisuutta!
+    //älä anna liian pientä kokoa
     public ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
             for (int j = 0; j < ruudut.length; j++) {
-                if (i == 0 || i == korkeus){
+                if (i == 0 || i == korkeus-1){
                     ruudut[j] = new Ruutu(i, j, true);
                 } else {
                     if (j == 0){
                         ruudut[j] = new Ruutu(i, j, true);
-                    } else if (j != 0 && j< ruudut.length){
+                    } else if (j != 0 && j< ruudut.length-1){
                         ruudut[j] = new Ruutu(i, j, false);
                     } else {
                         ruudut[j] = new Ruutu(i, j, true);
@@ -46,24 +50,11 @@ public class Kartta {
             }
             koordinaatisto.add(ruudut);
         }
+        // tässä välissä lisää muut oliot karttaan jos tarvitset
+        
         return this.koordinaatisto;
     }
     
-    public int getKorkeus() {
-        return korkeus;
-    }
-
-    public void setKorkeus(int korkeus) {
-        this.korkeus = korkeus;
-    }
-
-    public int getLeveys() {
-        return leveys;
-    }
-
-    public void setLeveys(int leveys) {
-        this.leveys = leveys;
-    }
     
     @Override
     public String toString(){

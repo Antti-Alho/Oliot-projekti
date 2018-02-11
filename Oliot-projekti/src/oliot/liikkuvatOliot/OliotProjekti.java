@@ -10,6 +10,7 @@ public class OliotProjekti {
         ArrayList<Ruutu[]> ruudut = kartta.getKartta(10, 10);
         System.out.println(kartta.toString());
         
+
     }
     
 }
