@@ -51,7 +51,7 @@ public class Kartta {
             koordinaatisto.add(ruudut);
         }
         // tässä välissä lisää muut oliot karttaan jos tarvitset
-        Ihminen ihminen = new Ihminen(leveys, leveys, leveys);
+        Ihminen ihminen = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(5)[5].setIhminen(ihminen);
         
         return this.koordinaatisto;
