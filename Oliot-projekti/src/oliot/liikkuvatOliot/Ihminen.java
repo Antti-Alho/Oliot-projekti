@@ -7,6 +7,24 @@ public class Ihminen {
     private int intell;
     private int cha;
     private Esine esine = new Esine();
+    private int x;
+    private int y;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
 
     public int getHumala() {
@@ -40,6 +58,9 @@ public class Ihminen {
         this.cha = cha;
         this.humala = humala;
         this.enu = enu;
+        
+    }
+    public Ihminen (int x, int y){
         
     }
 
