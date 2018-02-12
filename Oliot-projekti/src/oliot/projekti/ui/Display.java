@@ -13,7 +13,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Eelis
  */
 public class Display extends JFrame {
-    private final Naytto naytto;
+    private Naytto naytto;
     
     
     public Display() {

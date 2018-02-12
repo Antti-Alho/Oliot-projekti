@@ -54,6 +54,12 @@ public class Kartta {
         Ihminen ihminen = new Ihminen(leveys, leveys, leveys);
         koordinaatisto.get(5)[5].setIhminen(ihminen);
         
+        Ihminen ihminen2 = new Ihminen(leveys, leveys, leveys);
+        koordinaatisto.get(8)[8].setIhminen(ihminen);
+        
+        Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys);
+        koordinaatisto.get(1)[1].setIhminen(ihminen);
+        
         return this.koordinaatisto;
     }
     
