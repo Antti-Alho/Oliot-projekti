@@ -1,3 +1,4 @@
+
 package oliot.projekti.kartta;
 
 import java.util.ArrayList;
@@ -51,13 +52,13 @@ public class Kartta {
             koordinaatisto.add(ruudut);
         }
         // tässä välissä lisää muut oliot karttaan jos tarvitset
-        Ihminen ihminen = new Ihminen(leveys, leveys, leveys);
+        Ihminen ihminen = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(5)[5].setIhminen(ihminen);
         
-        Ihminen ihminen2 = new Ihminen(leveys, leveys, leveys);
+        Ihminen ihminen2 = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(8)[8].setIhminen(ihminen);
         
-        Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys);
+        Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(1)[1].setIhminen(ihminen);
         
         return this.koordinaatisto;
@@ -81,3 +82,4 @@ public class Kartta {
 
     
 }
+
