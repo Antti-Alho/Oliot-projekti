@@ -2,16 +2,16 @@
 package oliot.projekti.kartta;
 public class Room {
     private int height;
-    private int wedth;
+    private int width;
 
     public Room(int height, int wedth, Corridor corridor) {
         this.height = height;
-        this.wedth = wedth;
+        this.width = wedth;
     }
 
     public Room(int height, int wedth) {
         this.height = height;
-        this.wedth = wedth;
+        this.width = wedth;
     }
 
     public int getHeight() {
@@ -23,11 +23,11 @@ public class Room {
     }
 
     public int getWedth() {
-        return wedth;
+        return width;
     }
 
     public void setWedth(int wedth) {
-        this.wedth = wedth;
+        this.width = wedth;
     }
     
 }

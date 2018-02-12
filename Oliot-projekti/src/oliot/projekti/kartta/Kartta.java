@@ -1,6 +1,7 @@
 package oliot.projekti.kartta;
 
 import java.util.ArrayList;
+import java.util.Random;
 import oliot.liikkuvatOliot.Ihminen;
 
 public class Kartta {
@@ -8,8 +9,20 @@ public class Kartta {
     private int huoneidenMaara;
     private IntRange huoneidenKoko;
     private ArrayList<Ruutu[]> koordinaatisto;
+    private ArrayList<Ihminen> ihmiset;
+    private ArrayList<Room> huoneet;
+    
+    
+    public void GeneroiIhmiset(int ihmisia){
+        Random random = new Random();
+        for (int i = 0; i <=ihmisia; i++){
+            ihmiset.add(new Ihminen(random.nextInt(10)+1, random.nextInt(10)+1));
+        }
+        
+    }
 
     public Kartta(int maara, int kokoMin, int kokoMax) {
+        this.ihmiset = new ArrayList<>();
 
         this.huoneidenMaara = maara;
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
@@ -17,6 +30,7 @@ public class Kartta {
     }
     
     public Kartta() {
+        this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
         for (int i = 0; i < huoneidenMaara; i++) {
             Room room = new Room(huoneidenKoko.huoneenKoko(), huoneidenKoko.huoneenKoko());
