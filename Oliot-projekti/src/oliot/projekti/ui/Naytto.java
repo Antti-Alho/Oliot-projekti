@@ -19,29 +19,36 @@ import oliot.projekti.kartta.Ruutu;
 public class Naytto extends JPanel {
     Kartta kartta = new Kartta();
     ArrayList<Ruutu[]> ruudut = kartta.getKartta(10, 10);
-    private int x;
-    private int y;
+    final private int x;
+    final private int y;
+    private int xpixelit = 50;
+    private int ypixelit = 50;
     
     public Naytto() {
         setPreferredSize(new Dimension(400,400));
-        setBackground(Color.white);
+        setBackground(Color.WHITE);
+        x=200; y=150;
         
     }
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
             
-        int xpixelit = 50;
-        int ypixelit = 50;
+        
             
             
         for (int i = 0; i < ruudut.size(); i++) {
             Ruutu[] rivi =ruudut.get(i);
             for (int j = 0; j < rivi.length; j++) {
                 if(rivi[j].isSeinä()){
-                    g.setColor(Color.black);
-                    g.fillRect(xpixelit, ypixelit, 25, 25);
+                    paintHuone(g);
                 }
+                
+                if(rivi[j].getIhminen()!= null) {
+                        paintIhminen(g);
+                    }
+                    
+                
                 xpixelit = xpixelit+25;
             }
             xpixelit = 50;
@@ -51,5 +58,14 @@ public class Naytto extends JPanel {
         public void setKartta(ArrayList<Ruutu[]> ruudut) {
         this.ruudut = ruudut;
     }
-    
+        public void paintIhminen(Graphics g) {
+            g.setColor(Color.blue);
+            g.fillRect(xpixelit, ypixelit, 10, 10);
+        }
+        
+        public void paintHuone(Graphics g) {
+            g.setColor(Color.BLACK);
+            g.fillRect(xpixelit, ypixelit, 25, 25);
+        }
+
 }
