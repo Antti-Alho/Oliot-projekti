@@ -17,6 +17,7 @@ public class Display extends JFrame {
     
     
     public Display() {
+
         naytto = new Naytto();
         add(naytto, BorderLayout.CENTER);
         pack();
@@ -27,10 +28,9 @@ public class Display extends JFrame {
     }
     
     
+
+
     }
 
     
-    
-    
-    
-    
+
