@@ -1,6 +1,7 @@
 package oliot.projekti.kartta;
 
 import java.util.ArrayList;
+import oliot.liikkuvatOliot.Ihminen;
 
 public class Kartta {
 
@@ -14,16 +15,15 @@ public class Kartta {
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList<>();
     }
+    
     public Kartta() {
         this.koordinaatisto = new ArrayList<>();
         for (int i = 0; i < huoneidenMaara; i++) {
             Room room = new Room(huoneidenKoko.huoneenKoko(), huoneidenKoko.huoneenKoko());
-            
         }
         
     }
-    
-    
+
     //täyttää ja palauttaa koordinaatiston 
     public ArrayList<Ruutu[]> getKoordinaatisto(){
         
@@ -51,6 +51,8 @@ public class Kartta {
             koordinaatisto.add(ruudut);
         }
         // tässä välissä lisää muut oliot karttaan jos tarvitset
+        Ihminen ihminen = new Ihminen(leveys, leveys, leveys);
+        koordinaatisto.get(5)[5].setIhminen(ihminen);
         
         return this.koordinaatisto;
     }

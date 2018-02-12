@@ -21,7 +21,6 @@ public class Display extends JPanel {
     
     public Display() {
         setLayout(null);
-        
     }
     
     public void paintComponent(Graphics g) {
@@ -43,16 +42,11 @@ public class Display extends JPanel {
             }
             xpixelit = 50;
             ypixelit = ypixelit+25;
-            
-            
         }
     }
 
     public void setKartta(ArrayList<Ruutu[]> ruudut) {
         this.ruudut = ruudut;
     }
-    
-    
-    
     
 }

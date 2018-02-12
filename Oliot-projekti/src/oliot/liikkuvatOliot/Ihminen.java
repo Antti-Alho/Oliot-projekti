@@ -5,7 +5,7 @@ public class Ihminen {
     private int itell;
     private int cha;
 
-    public Ihminen(int str, int itelligence, int cha, int rakko) {
+    public Ihminen(int str, int itelligence, int cha) {
         this.str = str;
         this.itell = itell;
         this.cha = cha;
