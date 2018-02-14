@@ -5,6 +5,8 @@
  */
 package oliot.projekti.ui;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -14,18 +16,36 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class Display extends JFrame {
     private Naytto naytto;
+    private JButton aloita;
+    private JPanel painikepaneeli;
+    private AloitusRuutu naytto1;
     
     
     public Display() {
 
-        naytto = new Naytto();
-        add(naytto, BorderLayout.CENTER);
+        AloitusRuutu naytto1 = new AloitusRuutu();
+        JButton aloita = new JButton("Aloita");
+        painikepaneeli = new JPanel();
+        painikepaneeli.add(aloita);
+        aloita.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            naytto1.setVisible(false);
+            Naytto naytto = new Naytto();
+            add(naytto, BorderLayout.CENTER);
+            pack();
+            naytto.setVisible(true);
+        }
+    });
+        add(naytto1, BorderLayout.CENTER);
+        add(painikepaneeli, BorderLayout.SOUTH);
+        
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         
     }
+       
     
     
 
