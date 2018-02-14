@@ -1,9 +1,9 @@
 # FIGHT PUB
 
-Baaritappelu simulaatio missä joukko ihmisiä päästetään vapaasti temmeltämään generoituun baariin
-ihmisillä on tavoitteita joita he koittavat täyttää näistä saattaa seurata konflikteja muiden ihmisten kannssa
-mikä johtaa tappeluun voimakkain, fiksuin tai karismaattisin taistelija voittaa simulaatio päätyy kun enää 
-viimeinen taistelija on hengissä.
+Baaritappelu simulaatio, missä joukko ihmisiä päästetään vapaasti temmeltämään generoituun baariin.
+Ihmisillä on tavoitteita, joita he koittavat täyttää. Näistä saattaa seurata konflikteja muiden ihmisten kannssa,
+mikä johtaa tappeluun voimakkain, fiksuin tai karismaattisin taistelija voittaa. Simulaatio päätyy kun enää
+yksi taistelija on hengissä.
 
 ## to do:
 
