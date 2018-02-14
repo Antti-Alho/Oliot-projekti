@@ -1,5 +1,6 @@
 
 package oliot.liikkuvatOliot;
+import java.util.Random;
 public class Ihminen {
     private int humala;
     private int enu;
@@ -9,6 +10,7 @@ public class Ihminen {
     private Esine esine = new Esine();
     private int x;
     private int y;
+    Random rand = new Random();
 
     public int getX() {
         return x;
@@ -65,7 +67,7 @@ public class Ihminen {
     }
 
     public int getStr() {
-        return str;
+        return this.str;
     }
 
     public void setStr(int str) {
@@ -87,5 +89,11 @@ public class Ihminen {
     public void setCha(int cha) {
         this.cha = cha;
     }
-    
+    public void ArvoStatit(){
+        this.cha = rand.nextInt(10)+1;
+        this.enu = rand.nextInt(10)+1;
+        this.humala = rand.nextInt(10)+1;
+        this.intell = rand.nextInt(10)+1;
+        this.str = rand.nextInt(10)+1;
+    }               
 }

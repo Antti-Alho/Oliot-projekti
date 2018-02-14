@@ -16,9 +16,10 @@ public class Kartta {
     
     
     public void GeneroiIhmiset(int ihmisia){
-        Random random = new Random();
         for (int i = 0; i <=ihmisia; i++){
-            ihmiset.add(new Ihminen(random.nextInt(10)+1, random.nextInt(10)+1));
+            Ihminen ihminen = new Ihminen(i, i);
+            ihminen.ArvoStatit();
+            ihmiset.add(ihminen);
         }
         
     }
@@ -84,6 +85,8 @@ public class Kartta {
         
         Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(1)[1].setIhminen(ihminen);
+       
+        
         
         return this.koordinaatisto;
     }
