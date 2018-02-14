@@ -26,7 +26,7 @@ public class Naytto extends JPanel {
     
     public Naytto() {
         setPreferredSize(new Dimension(400,400));
-        setBackground(Color.WHITE);
+        setBackground(Color.BLUE);
         x=200; y=150;
         
     }
