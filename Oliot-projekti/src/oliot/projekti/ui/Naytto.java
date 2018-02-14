@@ -25,7 +25,7 @@ public class Naytto extends JPanel {
     private int ypixelit = 50;
     
     public Naytto() {
-        setPreferredSize(new Dimension(400,400));
+        setPreferredSize(new Dimension(600 , 600));
         setBackground(Color.WHITE);
         x=200; y=150;
         
@@ -33,10 +33,7 @@ public class Naytto extends JPanel {
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-            
         
-            
-            
         for (int i = 0; i < ruudut.size(); i++) {
             Ruutu[] rivi =ruudut.get(i);
             for (int j = 0; j < rivi.length; j++) {
