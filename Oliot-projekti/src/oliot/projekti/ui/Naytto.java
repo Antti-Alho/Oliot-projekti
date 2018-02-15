@@ -40,8 +40,10 @@ public class Naytto extends JPanel implements ActionListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+
         for (int i = 0; i < this.ruudut.size(); i++) {
             Ruutu[] rivi =this.ruudut.get(i);
+
             for (int j = 0; j < rivi.length; j++) {
                 if(rivi[j].isSeinä()){
                     paintHuone(g);

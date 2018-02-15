@@ -22,11 +22,11 @@ public class Room {
         this.height = height;
     }
 
-    public int getWedth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWedth(int wedth) {
+    public void setWidth(int wedth) {
         this.width = wedth;
     }
     

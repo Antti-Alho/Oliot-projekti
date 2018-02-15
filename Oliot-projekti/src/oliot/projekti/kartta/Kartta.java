@@ -12,13 +12,14 @@ public class Kartta {
     private IntRange huoneidenKoko;
     private ArrayList<Ruutu[]> koordinaatisto;
     private ArrayList<Ihminen> ihmiset;
-    private ArrayList<Room> huoneet;
+    private ArrayList<Room> rooms;
     
     
     public void GeneroiIhmiset(int ihmisia){
-        Random random = new Random();
         for (int i = 0; i <=ihmisia; i++){
-            ihmiset.add(new Ihminen(random.nextInt(10)+1, random.nextInt(10)+1));
+            Ihminen ihminen = new Ihminen(i, i);
+            ihminen.ArvoStatit();
+            ihmiset.add(ihminen);
         }
         
     }
@@ -35,9 +36,18 @@ public class Kartta {
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
         for (int i = 0; i < huoneidenMaara; i++) {
-            Room room = new Room(huoneidenKoko.huoneenKoko(), huoneidenKoko.huoneenKoko());
+            rooms.add(new Room(huoneidenKoko.arvoHuoneenKoko(), huoneidenKoko.arvoHuoneenKoko()));    
         }
         
+    }
+    
+    public void yhdistaHuoneet(){
+        for (int i = 0; i < rooms.size(); i++) {
+            Room room = rooms.get(i);
+            for (int j = 0; j < room.getWidth(); j++) {
+                
+            }
+        }
     }
 
     //täyttää ja palauttaa koordinaatiston 
@@ -75,6 +85,8 @@ public class Kartta {
         
         Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys, 0, 0);
         koordinaatisto.get(1)[1].setIhminen(ihminen);
+       
+        
         
         return this.koordinaatisto;
     }

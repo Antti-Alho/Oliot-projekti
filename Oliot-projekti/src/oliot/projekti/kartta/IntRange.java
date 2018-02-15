@@ -13,7 +13,7 @@ class IntRange {
         this.min = min;
     }
     
-    public int huoneenKoko(){
+    public int arvoHuoneenKoko(){
         return random.nextInt(max-min)+min;
     }
 }
