@@ -7,8 +7,9 @@ package oliot.projekti.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import oliot.projekti.kartta.Ruutu;
 
 /**
  *
@@ -21,7 +22,7 @@ public class Display extends JFrame {
     private AloitusRuutu naytto1;
     
     
-    public Display() {
+    public Display(ArrayList<Ruutu[]> ruudut) {
 
         AloitusRuutu naytto1 = new AloitusRuutu();
         JButton aloita = new JButton("Aloita");
@@ -30,7 +31,7 @@ public class Display extends JFrame {
         aloita.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             naytto1.setVisible(false);
-            Naytto naytto = new Naytto();
+            Naytto naytto = new Naytto(ruudut);
             add(naytto, BorderLayout.CENTER);
             pack();
             naytto.setVisible(true);
@@ -41,7 +42,7 @@ public class Display extends JFrame {
         
         pack();
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
         
         
     }
