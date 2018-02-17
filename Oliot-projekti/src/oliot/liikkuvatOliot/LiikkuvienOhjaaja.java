@@ -14,10 +14,23 @@ public class LiikkuvienOhjaaja {
     
     public ArrayList<Ihminen> Liikuta(){
         ArrayList<Ihminen> ihmiset = kartta.getIhmiset();
-        for (Ihminen ihminen : ihmiset) {
-            ihminen.setX(random.nextInt(10));
-            ihminen.setY(random.nextInt(10));
+        ArrayList<Ihminen> poistettavat = kartta.getIhmiset();
+        Ihminen a;
+        for (int i = 0; i < ihmiset.size(); i++) {
+            a = ihmiset.get(i);
+            a.setX(random.nextInt(10));
+            a.setY(random.nextInt(10));
+            for (int j = 0; j < ihmiset.size(); j++) {
+                if (j!=i){
+                    if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
+                        if(ihmiset.get(i).getY() == ihmiset.get(j).getY()){
+                            poistettavat.add(tappelunHävinnyt(ihmiset.get(i), ihmiset.get(j)));
+                        }
+                    }
+                }
+            }
         }
+        ihmiset.removeAll(poistettavat);
         return ihmiset;
     }
     
@@ -31,5 +44,11 @@ public class LiikkuvienOhjaaja {
 
     public void setKartta(Kartta kartta) {
         this.kartta = kartta;
+    }
+    
+    public Ihminen tappelunHävinnyt(Ihminen a, Ihminen b){
+        if (a.getStr() > b.getStr() ){
+            return b;
+        } else return a;
     }
 }

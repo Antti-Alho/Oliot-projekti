@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
+import oliot.liikkuvatOliot.Ihminen;
+import oliot.liikkuvatOliot.LiikkuvienOhjaaja;
 import oliot.projekti.kartta.Kartta;
 import oliot.projekti.kartta.Ruutu;
 
@@ -27,12 +29,16 @@ public class Naytto extends JPanel implements ActionListener{
     private int xpixelit = 50;
     private int ypixelit = 50;
     Timer timer=new Timer(500, this);
+    LiikkuvienOhjaaja ohjaaja;
+    int frameLaskuri = 0;
     
-    public Naytto(ArrayList<Ruutu[]> ruudut) {
+    public Naytto(Kartta kartta) {
+        this.ohjaaja = new LiikkuvienOhjaaja(kartta);
         setPreferredSize(new Dimension(1000,1000));
         setBackground(Color.BLUE);
         x=200; y=150;
-        this.ruudut = ruudut;
+        this.kartta = kartta;
+        this.ruudut = kartta.getKartta(10, 10);
         timer.start();// Start the timer here.
     }
     
@@ -45,10 +51,11 @@ public class Naytto extends JPanel implements ActionListener{
                 if(rivi[j].isSeinä()){
                     paintHuone(g);
                 }
-                
-                if(rivi[j].getIhminen()!= null) {
+                for (int k = 0; k < kartta.getIhmiset().size(); k++) {
+                    if(kartta.getIhmiset().get(k).getX() == i && kartta.getIhmiset().get(k).getY() == j) {
                         paintIhminen(g);
                     }
+                }
                 xpixelit = xpixelit+25;
             }
             xpixelit = 50;
@@ -74,9 +81,12 @@ public class Naytto extends JPanel implements ActionListener{
     
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource()==timer){
+            System.out.println(frameLaskuri);
+            frameLaskuri++;
+            ArrayList<Ihminen> Liikuta = ohjaaja.Liikuta();
+            kartta.setIhmiset(Liikuta);
             repaint();// this will call at every 1 second
         }
-
     }
 }
 

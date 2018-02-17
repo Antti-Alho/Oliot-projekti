@@ -54,16 +54,19 @@ public class Ihminen {
         this.esine = esine;
     }
 
-    public Ihminen(int str, int itelligence, int cha, int humala, int enu) {
+    public Ihminen(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
         this.str = str;
-        this.intell = intell;
+        this.intell = itelligence;
         this.cha = cha;
         this.humala = humala;
         this.enu = enu;
-        
+        this.x = x;
+        this.y = y;
     }
     public Ihminen (int x, int y){
-        
+        this.x = x;
+        this.y = y;
+        ArvoStatit();
     }
 
     public int getStr() {

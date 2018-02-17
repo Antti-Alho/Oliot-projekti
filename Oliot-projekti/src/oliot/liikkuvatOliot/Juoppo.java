@@ -10,9 +10,13 @@ package oliot.liikkuvatOliot;
  * @author Petteri
  */
 public class Juoppo extends Ihminen{
-    
-    public Juoppo(int str, int itelligence, int cha, int humala, int enu) {
-        super(str, itelligence, cha, humala, enu);
+
+    public Juoppo(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
+        super(str, itelligence, cha, humala, enu, x, y);
+    }
+
+    public Juoppo(int x, int y) {
+        super(x, y);
     }
     
 }

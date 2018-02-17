@@ -8,6 +8,7 @@ package oliot.projekti.ui;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import oliot.projekti.kartta.Kartta;
 import oliot.projekti.kartta.Ruutu;
 
 /**
@@ -17,9 +18,9 @@ import oliot.projekti.kartta.Ruutu;
 public class FrameDisplay extends JFrame {
     private Naytto naytto;
     
-    public FrameDisplay(ArrayList<Ruutu[]> ruudut) {
+    public FrameDisplay(Kartta kartta) {
         
-        Naytto naytto = new Naytto(ruudut);
+        Naytto naytto = new Naytto(kartta);
         add(naytto, BorderLayout.CENTER);
         pack();
         setVisible(true);

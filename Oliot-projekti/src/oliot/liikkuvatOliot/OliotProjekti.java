@@ -9,15 +9,9 @@ import oliot.projekti.ui.FrameDisplay;
 public class OliotProjekti {
     public static void main(String[] args) {
         Kartta kartta = new Kartta();
-        ArrayList<Ruutu[]> ruudut = kartta.getKartta(10, 10);
         LiikkuvienOhjaaja ohjaaja = new LiikkuvienOhjaaja(kartta);
-        
-        FrameDisplay display = new FrameDisplay(ruudut); 
-        
-        
-                    
-        }
-
+        FrameDisplay display = new FrameDisplay(kartta);
     }
+}
     
 

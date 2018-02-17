@@ -1,5 +1,3 @@
-
-
 package oliot.projekti.kartta;
 
 import java.util.ArrayList;
@@ -8,7 +6,6 @@ import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Ihminen;
 
 public class Kartta {
-    //luo koordinaatiston ruuduista esineistä ja ihmisistä
 
     private int huoneidenMaara;
     private IntRange huoneidenKoko;
@@ -23,39 +20,7 @@ public class Kartta {
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList<>();
     }
-
-    public int getHuoneidenMaara() {
-        return huoneidenMaara;
-    }
-
-    public void setHuoneidenMaara(int huoneidenMaara) {
-        this.huoneidenMaara = huoneidenMaara;
-    }
-
-    public IntRange getHuoneidenKoko() {
-        return huoneidenKoko;
-    }
-
-    public void setHuoneidenKoko(IntRange huoneidenKoko) {
-        this.huoneidenKoko = huoneidenKoko;
-    }
-
-    public ArrayList<Esine> getEsineet() {
-        return esineet;
-    }
-
-    public void setEsineet(ArrayList<Esine> esineet) {
-        this.esineet = esineet;
-    }
-
-    public ArrayList<Ihminen> getIhmiset() {
-        return ihmiset;
-    }
-
-    public void setIhmiset(ArrayList<Ihminen> ihmiset) {
-        this.ihmiset = ihmiset;
-    }
-
+    
     public Kartta() {
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
@@ -97,7 +62,6 @@ public class Kartta {
         }
     }
     public ArrayList<Ruutu[]> getKoordinaatisto(){
-
         return this.koordinaatisto;
     }
 
@@ -122,14 +86,17 @@ public class Kartta {
             koordinaatisto.add(ruudut);
         }
         // tässä välissä lisää muut oliot karttaan jos tarvitset
-        Ihminen ihminen = new Ihminen(leveys, leveys, leveys, 0, 0);
-        koordinaatisto.get(5)[5].setIhminen(ihminen);
+        Ihminen ihminen = new Ihminen(1,1);
+        ihminen.ArvoStatit();
+        ihmiset.add(ihminen);
 
-	 Ihminen ihminen2 = new Ihminen(leveys, leveys, leveys, 0, 0);
-        koordinaatisto.get(8)[8].setIhminen(ihminen);
+	Ihminen ihminen2 = new Ihminen(5,5);
+        ihminen.ArvoStatit();
+        ihmiset.add(ihminen2);
 
-        Ihminen ihminen3 = new Ihminen(leveys, leveys, leveys, 0, 0);
-        koordinaatisto.get(1)[1].setIhminen(ihminen);
+        Ihminen ihminen3 = new Ihminen(9,9);
+        ihminen.ArvoStatit();
+        ihmiset.add(ihminen3);
 
         return this.koordinaatisto;
     }
@@ -149,4 +116,35 @@ public class Kartta {
 
     }
     
+    public int getHuoneidenMaara() {
+        return huoneidenMaara;
+    }
+
+    public void setHuoneidenMaara(int huoneidenMaara) {
+        this.huoneidenMaara = huoneidenMaara;
+    }
+
+    public IntRange getHuoneidenKoko() {
+        return huoneidenKoko;
+    }
+
+    public void setHuoneidenKoko(IntRange huoneidenKoko) {
+        this.huoneidenKoko = huoneidenKoko;
+    }
+
+    public ArrayList<Esine> getEsineet() {
+        return esineet;
+    }
+
+    public void setEsineet(ArrayList<Esine> esineet) {
+        this.esineet = esineet;
+    }
+
+    public ArrayList<Ihminen> getIhmiset() {
+        return ihmiset;
+    }
+
+    public void setIhmiset(ArrayList<Ihminen> ihmiset) {
+        this.ihmiset = ihmiset;
+    }
 }

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
-import oliot.projekti.kartta.Ruutu;
+import oliot.projekti.kartta.Kartta;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Display extends JFrame {
     private AloitusRuutu naytto1;
     
     
-    public Display(ArrayList<Ruutu[]> ruudut) {
+    public Display(Kartta kartta) {
 
         AloitusRuutu naytto1 = new AloitusRuutu();
         JButton aloita = new JButton("Aloita");
@@ -31,7 +31,7 @@ public class Display extends JFrame {
         aloita.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             naytto1.setVisible(false);
-            Naytto naytto = new Naytto(ruudut);
+            Naytto naytto = new Naytto(kartta);
             add(naytto, BorderLayout.CENTER);
             pack();
             naytto.setVisible(true);
