@@ -24,6 +24,38 @@ public class Kartta {
         this.koordinaatisto = new ArrayList<>();
     }
 
+    public int getHuoneidenMaara() {
+        return huoneidenMaara;
+    }
+
+    public void setHuoneidenMaara(int huoneidenMaara) {
+        this.huoneidenMaara = huoneidenMaara;
+    }
+
+    public IntRange getHuoneidenKoko() {
+        return huoneidenKoko;
+    }
+
+    public void setHuoneidenKoko(IntRange huoneidenKoko) {
+        this.huoneidenKoko = huoneidenKoko;
+    }
+
+    public ArrayList<Esine> getEsineet() {
+        return esineet;
+    }
+
+    public void setEsineet(ArrayList<Esine> esineet) {
+        this.esineet = esineet;
+    }
+
+    public ArrayList<Ihminen> getIhmiset() {
+        return ihmiset;
+    }
+
+    public void setIhmiset(ArrayList<Ihminen> ihmiset) {
+        this.ihmiset = ihmiset;
+    }
+
     public Kartta() {
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
@@ -50,11 +82,11 @@ public class Kartta {
             
             Room room = rooms.get(i);
             for (int j = 0; j < room.getHeight()+korkein; j++) {
-                Ruutu[] a = new Ruutu[room.getWedth()];
-                for (int l = 0; l < room.getWedth()+levein; l++) {
+                Ruutu[] a = new Ruutu[room.getWidth()];
+                for (int l = 0; l < room.getWidth()+levein; l++) {
                     if(j == 0 || j == room.getHeight()){
                         Ruutu ruutu = new Ruutu(j, l, true);
-                    }else if(l == 0 || l == room.getWedth()) {
+                    }else if(l == 0 || l == room.getWidth()) {
                         Ruutu ruutu = new Ruutu(j, l, true);
                     } else {
                         Ruutu ruutu = new Ruutu(j, l, false);
@@ -64,8 +96,6 @@ public class Kartta {
             korkein = korkein + room.getHeight();
         }
     }
-
-    //täyttää ja palauttaa koordinaatiston
     public ArrayList<Ruutu[]> getKoordinaatisto(){
 
         return this.koordinaatisto;
