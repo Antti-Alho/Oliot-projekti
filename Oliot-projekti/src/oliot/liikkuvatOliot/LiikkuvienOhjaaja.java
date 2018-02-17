@@ -14,7 +14,7 @@ public class LiikkuvienOhjaaja {
     
     public ArrayList<Ihminen> Liikuta(){
         ArrayList<Ihminen> ihmiset = kartta.getIhmiset();
-        ArrayList<Ihminen> poistettavat = kartta.getIhmiset();
+        ArrayList<Ihminen> poistettavat = new ArrayList<>(); 
         Ihminen a;
         for (int i = 0; i < ihmiset.size(); i++) {
             a = ihmiset.get(i);
