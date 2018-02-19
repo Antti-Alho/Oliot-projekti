@@ -24,8 +24,7 @@ import oliot.projekti.kartta.Ruutu;
 public class Naytto extends JPanel implements ActionListener{
     Kartta kartta;
     private ArrayList<Ruutu[]> ruudut;
-    final private int x;
-    final private int y;
+    
     private int xpixelit = 50;
     private int ypixelit = 50;
     Timer timer=new Timer(500, this);
@@ -36,9 +35,9 @@ public class Naytto extends JPanel implements ActionListener{
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
         setPreferredSize(new Dimension(1000,1000));
         setBackground(Color.BLUE);
-        x=200; y=150;
+        
         this.kartta = kartta;
-        this.ruudut = kartta.getKartta(10, 10);
+        this.ruudut = kartta.getKartta(20, 20);
         timer.start();// Start the timer here.
     }
     
@@ -46,16 +45,24 @@ public class Naytto extends JPanel implements ActionListener{
         super.paintComponent(g);
         for (int i = 0; i < this.ruudut.size(); i++) {
             Ruutu[] rivi =this.ruudut.get(i);
-
+            
+            //seinien tulostus
             for (int j = 0; j < rivi.length; j++) {
                 if(rivi[j].isSeinä()){
                     paintHuone(g);
                 }
+                //ihmisten tulostus
                 for (int k = 0; k < kartta.getIhmiset().size(); k++) {
-                    if(kartta.getIhmiset().get(k).getX() == i && kartta.getIhmiset().get(k).getY() == j) {
-                        paintIhminen(g);
+                    if(kartta.getIhmiset().get(k).getX() == i && 
+                            kartta.getIhmiset().get(k).getY() == j) {
+                        paintIhminen(g);       
                     }
                 }
+                //esineiden tulostus
+                for (int k = 0; k < kartta.getEsineet(); k++) {
+                   paintEsineet(g);
+                }
+                
                 xpixelit = xpixelit+25;
             }
             xpixelit = 50;
@@ -77,6 +84,11 @@ public class Naytto extends JPanel implements ActionListener{
     public void paintHuone(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(xpixelit, ypixelit, 25, 25);
+    }
+    
+    public void paintEsine(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillOval(xpixelit, ypixelit, 10, 10);
     }
     
     public void actionPerformed(ActionEvent ev){
