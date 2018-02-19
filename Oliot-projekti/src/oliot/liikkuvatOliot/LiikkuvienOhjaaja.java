@@ -64,16 +64,17 @@ public class LiikkuvienOhjaaja {
             case 3: y = y - 1;
                     break;
         }
-        if(x > 9){
+        //niin kauan kuin kartta on neliö, kartta.getKoordinaatisto().size() toimii
+        if(x > kartta.getKoordinaatisto().size() - 2){
             x = x - 1;
         }
-        else if(y > 9){
+        else if(y > kartta.getKoordinaatisto().size() - 2){
             y = y - 1;
         }
-        else if(x < 0){
+        else if(x < 1){
             x = x + 1;
         }
-        else if(y < 0){
+        else if(y < 1){
             y = y + 1;
         }
         ihminen.setX(x);

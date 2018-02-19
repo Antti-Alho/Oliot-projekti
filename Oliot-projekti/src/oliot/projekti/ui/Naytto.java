@@ -71,7 +71,7 @@ public class Naytto extends JPanel implements ActionListener{
     
     public void paintIhminen(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillRect(xpixelit, ypixelit, 10, 10);
+        g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     
     public void paintHuone(Graphics g) {
