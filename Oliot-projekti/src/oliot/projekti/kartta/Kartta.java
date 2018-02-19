@@ -46,7 +46,12 @@ public class Kartta {
             int x = r.nextInt(20);
             int y = r.nextInt(20);
             Ihminen ihminen = new Ihminen(x, y);
-            ihminen.ArvoStatit();
+            for (Ihminen ihminen1 : ihmiset) {
+                if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
+                    ihminen.setX(ihminen.getX() + 1);
+                }
+            }
+            
             ihmiset.add(ihminen);
         }
     }
