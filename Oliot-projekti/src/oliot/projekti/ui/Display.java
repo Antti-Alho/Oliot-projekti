@@ -28,30 +28,24 @@ public class Display extends JFrame {
         JButton aloita = new JButton("Aloita");
         painikepaneeli = new JPanel();
         painikepaneeli.add(aloita);
+        
         aloita.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            naytto1.setVisible(false);
-            Naytto naytto = new Naytto(kartta);
-            add(naytto, BorderLayout.CENTER);
-            pack();
-            naytto.setVisible(true);
-        }
-    });
+            public void actionPerformed(ActionEvent e) {
+                naytto1.setVisible(false);
+                Naytto naytto = new Naytto(kartta);
+                add(naytto, BorderLayout.CENTER);
+                pack();
+                naytto.setVisible(true);
+            }
+        });
+        
         add(naytto1, BorderLayout.CENTER);
         add(painikepaneeli, BorderLayout.SOUTH);
         
         pack();
-        setVisible(true);
-        
-        
-        
+        setVisible(true);    
     }
-       
-    
-    
-
-
-    }
+}
 
     
 

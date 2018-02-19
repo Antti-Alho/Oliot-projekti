@@ -11,4 +11,8 @@ package oliot.liikkuvatOliot;
  */
 public class Tuoli extends Esine{
     
+    public Tuoli(int x, int y) {
+        super(x, y);
+    }
+    
 }

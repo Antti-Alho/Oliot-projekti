@@ -34,8 +34,7 @@ public class LiikkuvienOhjaaja {
         return ihmiset;
     }
     
-    public void humalaAskel(){
-        
+    public void humalaAskel(Ihminen ihminen){
     }
 
     public Kartta getKartta() {
