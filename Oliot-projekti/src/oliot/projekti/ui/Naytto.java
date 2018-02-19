@@ -38,7 +38,7 @@ public class Naytto extends JPanel implements ActionListener{
         setBackground(Color.BLUE);
         x=200; y=150;
         this.kartta = kartta;
-        this.ruudut = kartta.getKartta(10, 10);
+        this.ruudut = kartta.generoiKartta(20, 20);
         timer.start();// Start the timer here.
     }
     

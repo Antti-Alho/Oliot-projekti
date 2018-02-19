@@ -16,6 +16,11 @@ public class Olut extends Esine{
         return maara;
     }
 
+    public Olut(int maara, int x, int y) {
+        super(x, y);
+        this.maara = maara;
+    }
+
     public void setMaara(int maara) {
         this.maara = maara;
     }
