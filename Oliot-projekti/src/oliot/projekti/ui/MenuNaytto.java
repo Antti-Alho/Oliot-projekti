@@ -13,13 +13,12 @@ import javax.swing.JPanel;
  *
  * @author melto
  */
-public class AloitusRuutu extends JPanel {
+public class MenuNaytto extends JPanel {
     
-    public AloitusRuutu() {
-        setPreferredSize(new Dimension(300,300));
-        setBackground(Color.BLACK);
+    public MenuNaytto() {
+        setPreferredSize(new Dimension(500,500));
+        setBackground(Color.WHITE);
+        
     }
-
-    
     
 }

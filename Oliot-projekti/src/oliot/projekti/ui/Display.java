@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
+import oliot.liikkuvatOliot.LiikkuvienOhjaaja;
 import oliot.projekti.kartta.Kartta;
 
 /**
@@ -17,41 +18,56 @@ import oliot.projekti.kartta.Kartta;
  */
 public class Display extends JFrame {
     private Naytto naytto;
+    private MenuNaytto naytto1;
     private JButton aloita;
-    private JPanel painikepaneeli;
-    private AloitusRuutu naytto1;
+    private JPanel painikepaneeli, kokopaneeli;
+    private JLabel kokolabel;
+    private JTextField tekstikenttä;
+    private JSpinner numerot;
     
     
-    public Display(Kartta kartta) {
+    public Display() {
 
-        AloitusRuutu naytto1 = new AloitusRuutu();
+        MenuNaytto naytto1 = new MenuNaytto();
         JButton aloita = new JButton("Aloita");
         painikepaneeli = new JPanel();
+        kokopaneeli = new JPanel();
+        kokolabel = new JLabel("Anna koko");
+        
+        //vaihtoehto jos textfield ei toimi
+        numerot = new JSpinner();
+        //textfield
+        tekstikenttä = new JTextField(10);
+        
+        kokopaneeli.add(kokolabel);
+        kokopaneeli.add(tekstikenttä);
         painikepaneeli.add(aloita);
+        
+        
+        //nappi josta ohjelma alkaa
         aloita.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            naytto1.setVisible(false);
-            Naytto naytto = new Naytto(kartta);
-            add(naytto, BorderLayout.CENTER);
-            pack();
-            naytto.setVisible(true);
-        }
-    });
+            public void actionPerformed(ActionEvent e) {
+                naytto1.setVisible(false);
+                int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
+                Kartta kartta = new Kartta(HEIGHT, NORMAL, TextFieldValue, NORMAL, WIDTH);
+                LiikkuvienOhjaaja ohjaaja = new LiikkuvienOhjaaja(kartta);
+                Naytto naytto = new Naytto(kartta);
+                add(naytto, BorderLayout.CENTER);
+                pack();
+                naytto.setVisible(true);
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
+                
+            }
+        });
         add(naytto1, BorderLayout.CENTER);
         add(painikepaneeli, BorderLayout.SOUTH);
+        add(kokopaneeli, BorderLayout.CENTER);
         
         pack();
-        setVisible(true);
-        
-        
-        
+        setVisible(true);    
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-       
-    
-    
-
-
-    }
+}
 
     
 

@@ -37,7 +37,7 @@ public class Naytto extends JPanel implements ActionListener{
         setBackground(Color.BLUE);
         
         this.kartta = kartta;
-        this.ruudut = kartta.getKartta(20, 20);
+        this.ruudut = kartta.generoiKartta(20, 20);
         timer.start();// Start the timer here.
     }
     
@@ -59,9 +59,6 @@ public class Naytto extends JPanel implements ActionListener{
                     }
                 }
                 //esineiden tulostus
-                for (int k = 0; k < kartta.getEsineet(); k++) {
-                   paintEsineet(g);
-                }
                 
                 xpixelit = xpixelit+25;
             }

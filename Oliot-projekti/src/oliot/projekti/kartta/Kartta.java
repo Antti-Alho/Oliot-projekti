@@ -14,11 +14,20 @@ public class Kartta {
     private ArrayList<Ihminen> ihmiset;
     private ArrayList<Room> rooms;
 
-    public Kartta(int maara, int kokoMin, int kokoMax) {
+    public Kartta(
+            int huoneidenMaara,
+            int kokoMin,
+            int kokoMax,
+            int esineidenMaara,
+            int ihmistenMaara
+    ) {
         this.ihmiset = new ArrayList<>();
-        this.huoneidenMaara = maara;
+        this.esineet = new ArrayList<>();
+        this.huoneidenMaara = huoneidenMaara;
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
-        this.koordinaatisto = new ArrayList<>();
+        this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
+        generoiIhmiset(ihmistenMaara);
+        generoiEsineet(esineidenMaara);
     }
     
     public Kartta() {
@@ -27,16 +36,14 @@ public class Kartta {
         for (int i = 0; i < huoneidenMaara; i++) {
             rooms.add(new Room(huoneidenKoko.arvoHuoneenKoko(), huoneidenKoko.arvoHuoneenKoko()));
         }
-
     }
 
-    public void GeneroiIhmiset(int ihmisia){
+    public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
             Ihminen ihminen = new Ihminen(i, i);
             ihminen.ArvoStatit();
             ihmiset.add(ihminen);
         }
-
     }
     //ei toimi vielä älä koske antti hoitaa
     public void yhdistaHuoneet(){
@@ -67,7 +74,7 @@ public class Kartta {
 
     //luo yhden huoneen jolla testataan muuta toiminnallisuutta!
     //älä anna liian pientä kokoa
-    public ArrayList<Ruutu[]> getKartta(int korkeus, int leveys){
+    public ArrayList<Ruutu[]> generoiKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
             for (int j = 0; j < ruudut.length; j++) {
@@ -85,19 +92,6 @@ public class Kartta {
             }
             koordinaatisto.add(ruudut);
         }
-        // tässä välissä lisää muut oliot karttaan jos tarvitset
-        Ihminen ihminen = new Ihminen(1,1);
-        ihminen.ArvoStatit();
-        ihmiset.add(ihminen);
-
-	Ihminen ihminen2 = new Ihminen(5,5);
-        ihminen.ArvoStatit();
-        ihmiset.add(ihminen2);
-
-        Ihminen ihminen3 = new Ihminen(9,9);
-        ihminen.ArvoStatit();
-        ihmiset.add(ihminen3);
-
         return this.koordinaatisto;
     }
 
@@ -146,5 +140,9 @@ public class Kartta {
 
     public void setIhmiset(ArrayList<Ihminen> ihmiset) {
         this.ihmiset = ihmiset;
+    }
+
+    private void generoiEsineet(int esineidenMaara) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

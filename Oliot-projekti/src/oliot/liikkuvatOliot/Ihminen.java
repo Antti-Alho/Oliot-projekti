@@ -7,7 +7,7 @@ public class Ihminen {
     private int str;
     private int intell;
     private int cha;
-    private Esine esine = new Esine();
+    private Esine esine;
     private int x;
     private int y;
     Random rand = new Random();
@@ -45,7 +45,7 @@ public class Ihminen {
         this.enu = enu;
     }
     
-    
+    //testaa onko null
     public Esine getEsine() {
         return esine;
     }
