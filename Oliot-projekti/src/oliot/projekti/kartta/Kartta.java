@@ -13,6 +13,7 @@ public class Kartta {
     private ArrayList<Esine> esineet;
     private ArrayList<Ihminen> ihmiset;
     private ArrayList<Room> rooms;
+    Random r;
 
     public Kartta(
             int huoneidenMaara,
@@ -21,6 +22,7 @@ public class Kartta {
             int esineidenMaara,
             int ihmistenMaara
     ) {
+        this.r = new Random();
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
         this.huoneidenMaara = huoneidenMaara;
@@ -31,6 +33,7 @@ public class Kartta {
     }
     
     public Kartta() {
+        this.r = new Random();
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
         for (int i = 0; i < huoneidenMaara; i++) {
@@ -40,8 +43,15 @@ public class Kartta {
 
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
-            Ihminen ihminen = new Ihminen(i, i);
-            ihminen.ArvoStatit();
+            int x = r.nextInt(20);
+            int y = r.nextInt(20);
+            Ihminen ihminen = new Ihminen(x, y);
+            for (Ihminen ihminen1 : ihmiset) {
+                if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
+                    ihminen.setX(ihminen.getX() + 1);
+                }
+            }
+            
             ihmiset.add(ihminen);
         }
     }
@@ -92,6 +102,7 @@ public class Kartta {
             }
             koordinaatisto.add(ruudut);
         }
+        generoiIhmiset(20);
         return this.koordinaatisto;
     }
 

@@ -31,6 +31,7 @@ public class Naytto extends JPanel implements ActionListener{
     LiikkuvienOhjaaja ohjaaja;
     int frameLaskuri = 0;
     
+    
     public Naytto(Kartta kartta) {
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
         setPreferredSize(new Dimension(1000,1000));
@@ -75,7 +76,7 @@ public class Naytto extends JPanel implements ActionListener{
     
     public void paintIhminen(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillRect(xpixelit, ypixelit, 10, 10);
+        g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     
     public void paintHuone(Graphics g) {
@@ -92,6 +93,7 @@ public class Naytto extends JPanel implements ActionListener{
         if(ev.getSource()==timer){
             System.out.println(frameLaskuri);
             frameLaskuri++;
+            System.out.println("ihmisiä on " + kartta.getIhmiset().size());
             ArrayList<Ihminen> Liikuta = ohjaaja.Liikuta();
             kartta.setIhmiset(Liikuta);
             repaint();// this will call at every 1 second
