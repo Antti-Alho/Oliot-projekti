@@ -18,8 +18,8 @@ public class LiikkuvienOhjaaja {
         Ihminen a;
         for (int i = 0; i < ihmiset.size(); i++) {
             a = ihmiset.get(i);
-            a.setX(random.nextInt(10));
-            a.setY(random.nextInt(10));
+            a = yksiAskel(a);
+            
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
                     if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
@@ -50,5 +50,36 @@ public class LiikkuvienOhjaaja {
         if (a.getStr() > b.getStr() ){
             return b;
         } else return a;
+    }
+    public Ihminen yksiAskel(Ihminen ihminen){
+        int x = ihminen.getX();
+        int y = ihminen.getY();
+        int caseArvo = random.nextInt(4);
+        switch (caseArvo){
+            case 0: x = x + 1;
+                    break;
+            case 1: y = y + 1;
+                    break;
+            case 2: x = x - 1;
+                    break;
+            case 3: y = y - 1;
+                    break;
+        }
+        if(x > 9){
+            x = x - 1;
+        }
+        else if(y > 9){
+            y = y - 1;
+        }
+        else if(x < 0){
+            x = x + 1;
+        }
+        else if(y < 0){
+            y = y + 1;
+        }
+        ihminen.setX(x);
+        ihminen.setY(y);
+        return ihminen;
+        
     }
 }
