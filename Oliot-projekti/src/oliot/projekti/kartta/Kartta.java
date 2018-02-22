@@ -82,8 +82,7 @@ public class Kartta {
         return this.koordinaatisto;
     }
 
-    //luo yhden huoneen jolla testataan muuta toiminnallisuutta!
-    //älä anna liian pientä kokoa
+    //ajetaan kerran luonnin yhteydessä
     public ArrayList<Ruutu[]> generoiKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
