@@ -36,9 +36,8 @@ public class Naytto extends JPanel implements ActionListener{
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
         setPreferredSize(new Dimension(1000,1000));
         setBackground(Color.BLUE);
-        
         this.kartta = kartta;
-        this.ruudut = kartta.generoiKartta(20, 20);
+        this.ruudut = kartta.getKoordinaatisto();
         timer.start();// Start the timer here.
     }
     

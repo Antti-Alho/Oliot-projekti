@@ -7,9 +7,7 @@ package oliot.projekti.ui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.*;
-import oliot.liikkuvatOliot.LiikkuvienOhjaaja;
 import oliot.projekti.kartta.Kartta;
 
 /**
@@ -49,8 +47,7 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 naytto1.setVisible(false);
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
-                Kartta kartta = new Kartta(20, 20, TextFieldValue, 10, 5);
-                LiikkuvienOhjaaja ohjaaja = new LiikkuvienOhjaaja(kartta);
+                Kartta kartta = new Kartta(20, 20, TextFieldValue, 20, 20);
                 Naytto naytto = new Naytto(kartta);
                 add(naytto, BorderLayout.CENTER);
                 pack();
