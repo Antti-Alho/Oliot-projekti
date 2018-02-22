@@ -27,6 +27,7 @@ public class Kartta {
         this.esineet = new ArrayList<>();
         this.huoneidenMaara = huoneidenMaara;
         this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
+        this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiIhmiset(ihmistenMaara);
         generoiEsineet(esineidenMaara);
@@ -43,15 +44,14 @@ public class Kartta {
 
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
-            int x = r.nextInt(20);
-            int y = r.nextInt(20);
+            int x = r.nextInt(huoneidenKoko.max);
+            int y = r.nextInt(huoneidenKoko.max);
             Ihminen ihminen = new Ihminen(x, y);
             for (Ihminen ihminen1 : ihmiset) {
                 if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
                     ihminen.setX(ihminen.getX() + 1);
                 }
             }
-            
             ihmiset.add(ihminen);
         }
     }
@@ -102,7 +102,6 @@ public class Kartta {
             }
             koordinaatisto.add(ruudut);
         }
-        generoiIhmiset(20);
         return this.koordinaatisto;
     }
 
@@ -154,6 +153,9 @@ public class Kartta {
     }
 
     private void generoiEsineet(int esineidenMaara) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < esineidenMaara; i++) {
+            Esine e = new Esine(r.nextInt(huoneidenKoko.max), r.nextInt(huoneidenKoko.max));
+            esineet.add(e);
+        }
     }
 }

@@ -49,7 +49,7 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 naytto1.setVisible(false);
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
-                Kartta kartta = new Kartta(HEIGHT, NORMAL, TextFieldValue, NORMAL, WIDTH);
+                Kartta kartta = new Kartta(20, 20, TextFieldValue, 10, 5);
                 LiikkuvienOhjaaja ohjaaja = new LiikkuvienOhjaaja(kartta);
                 Naytto naytto = new Naytto(kartta);
                 add(naytto, BorderLayout.CENTER);
