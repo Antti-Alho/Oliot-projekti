@@ -28,6 +28,5 @@ public class Olut extends Esine{
     public void Juo(){
         this.maara = maara - 1;
     }
-    
-    
+        
 }

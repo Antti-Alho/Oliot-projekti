@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import oliot.projekti.kartta.Kartta;
+import oliot.projekti.kartta.Map;
 
 /**
  *
@@ -47,7 +47,7 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 naytto1.setVisible(false);
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
-                Kartta kartta = new Kartta(20, 20, TextFieldValue, 20, 20);
+                Map kartta = new Map(20, 20, TextFieldValue, 20, 20);
                 Naytto naytto = new Naytto(kartta);
                 add(naytto, BorderLayout.CENTER);
                 pack();

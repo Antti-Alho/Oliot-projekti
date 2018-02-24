@@ -1,24 +1,24 @@
 package oliot.liikkuvatOliot;
 import java.util.ArrayList;
-import oliot.projekti.kartta.Kartta;
+import oliot.projekti.kartta.Map;
 import oliot.projekti.kartta.Ruutu;
 import java.util.Random;
 
 public class LiikkuvienOhjaaja {
     Random random = new Random();
-    Kartta kartta;
+    Map map;
     
-    public LiikkuvienOhjaaja(Kartta kartta){
-        this.kartta = kartta;
+    public LiikkuvienOhjaaja(Map kartta){
+        this.map = kartta;
     }
     
-    public ArrayList<Ihminen> Liikuta(){
-        ArrayList<Ihminen> ihmiset = kartta.getIhmiset();
-        ArrayList<Ihminen> poistettavat = new ArrayList<>(); 
-        Ihminen a;
+    public ArrayList<Human> Liikuta(){
+        ArrayList<Human> ihmiset = map.getIhmiset();
+        ArrayList<Human> poistettavat = new ArrayList<>(); 
+        Human human;
         for (int i = 0; i < ihmiset.size(); i++) {
-            a = ihmiset.get(i);
-            a = yksiAskel(a);
+            human = ihmiset.get(i);
+            human = humalaAskel(human);
             
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
@@ -34,52 +34,74 @@ public class LiikkuvienOhjaaja {
         return ihmiset;
     }
     
-    public void humalaAskel(Ihminen ihminen){
-    }
-
-    public Kartta getKartta() {
-        return kartta;
-    }
-
-    public void setKartta(Kartta kartta) {
-        this.kartta = kartta;
+    public int kerroSuunta(Human ihminen){
+        return 1;
     }
     
-    public Ihminen tappelunHävinnyt(Ihminen a, Ihminen b){
+    public Human humalaAskel(Human human){
+        int x = human.getX();
+        int y = human.getY();
+        int caseArvo = random.nextInt(4);
+        switch (caseArvo){
+            case 0: if (map.getKoordinaatisto().get(y)[x+1].isSeinä() == false)
+                    x = x + 1;
+                    break;
+                    
+            case 1: if (map.getKoordinaatisto().get(y+1)[x].isSeinä() == false)
+                    y = y + 1;
+                    break;
+                    
+            case 2: if (map.getKoordinaatisto().get(y)[x-1].isSeinä() == false)
+                    x = x - 1;
+                    break;
+                    
+            case 3: if (map.getKoordinaatisto().get(y-1)[x].isSeinä() == false)
+                    y = y - 1;
+                    break;
+        }
+        human.setX(x);
+        human.setY(y);
+        return human;
+    }
+    
+    public Human yksiAskel(Human human){
+        int x = human.getX();
+        int y = human.getY();
+        int suunta = kerroSuunta(human);
+        switch (suunta){
+            case 0: if (map.getKoordinaatisto().get(y)[x+1].isSeinä() == false)
+                    x = x + 1;
+                    break;
+                    
+            case 1: if (map.getKoordinaatisto().get(y+1)[x].isSeinä() == false)
+                    y = y + 1;
+                    break;
+            
+            case 2: if (map.getKoordinaatisto().get(y)[x-1].isSeinä() == false)
+                    x = x - 1;
+                    break;
+            
+            case 3: if (map.getKoordinaatisto().get(y-1)[x].isSeinä() == false)
+                    y = y - 1;
+                    break;
+        }
+        human.setX(x);
+        human.setY(y);
+        return human;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+    
+    public Human tappelunHävinnyt(Human a, Human b){
         if (a.getStr() > b.getStr() ){
             return b;
         } else return a;
     }
-    public Ihminen yksiAskel(Ihminen ihminen){
-        int x = ihminen.getX();
-        int y = ihminen.getY();
-        int caseArvo = random.nextInt(4);
-        switch (caseArvo){
-            case 0: x = x + 1;
-                    break;
-            case 1: y = y + 1;
-                    break;
-            case 2: x = x - 1;
-                    break;
-            case 3: y = y - 1;
-                    break;
-        }
-        //niin kauan kuin kartta on neliö, kartta.getKoordinaatisto().size() toimii
-        if(x > kartta.getKoordinaatisto().size() - 2){
-            x = x - 1;
-        }
-        else if(y > kartta.getKoordinaatisto().size() - 2){
-            y = y - 1;
-        }
-        else if(x < 1){
-            x = x + 1;
-        }
-        else if(y < 1){
-            y = y + 1;
-        }
-        ihminen.setX(x);
-        ihminen.setY(y);
-        return ihminen;
-        
-    }
+
 }

@@ -9,7 +9,7 @@ package oliot.liikkuvatOliot;
  *
  * @author Petteri
  */
-public class Juoppo extends Ihminen{
+public class Juoppo extends Human{
 
     public Juoppo(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
         super(str, itelligence, cha, humala, enu, x, y);

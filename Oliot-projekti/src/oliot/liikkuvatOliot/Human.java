@@ -1,7 +1,7 @@
 
 package oliot.liikkuvatOliot;
 import java.util.Random;
-public class Ihminen {
+public class Human {
     private int humala;
     private int enu;
     private int str;
@@ -14,7 +14,7 @@ public class Ihminen {
     private int y;
     Random rand = new Random();
     
-    public Ihminen(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
+    public Human(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
         this.str = str;
         this.intell = itelligence;
         this.cha = cha;
@@ -25,7 +25,7 @@ public class Ihminen {
         
         this.tavoite = 1;
     }
-    public Ihminen (int x, int y){
+    public Human (int x, int y){
         this.x = x;
         this.y = y;
         ArvoStatit();

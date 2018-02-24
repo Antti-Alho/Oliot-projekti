@@ -3,19 +3,19 @@ package oliot.projekti.kartta;
 import java.util.ArrayList;
 import java.util.Random;
 import oliot.liikkuvatOliot.Esine;
-import oliot.liikkuvatOliot.Ihminen;
+import oliot.liikkuvatOliot.Human;
 
-public class Kartta {
+public class Map {
 
     private int roomAmount;
     private IntRange roomSize;
     private ArrayList<Ruutu[]> koordinaatisto;
     private ArrayList<Esine> esineet;
-    private ArrayList<Ihminen> ihmiset;
+    private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
     Random r;
 
-    public Kartta(
+    public Map(
             int huoneidenMaara,
             int kokoMin,
             int kokoMax,
@@ -33,7 +33,7 @@ public class Kartta {
         generoiEsineet(esineidenMaara);
     }
     
-    public Kartta() {
+    public Map() {
         this.r = new Random();
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
@@ -44,10 +44,10 @@ public class Kartta {
 
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
-            int x = r.nextInt(roomSize.max);
-            int y = r.nextInt(roomSize.max);
-            Ihminen ihminen = new Ihminen(x, y);
-            for (Ihminen ihminen1 : ihmiset) {
+            int x = r.nextInt(1+roomSize.max-2);
+            int y = r.nextInt(1+roomSize.max-2);
+            Human ihminen = new Human(x, y);
+            for (Human ihminen1 : ihmiset) {
                 if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
                     ihminen.setX(ihminen.getX() + 1);
                 }
@@ -143,11 +143,11 @@ public class Kartta {
         this.esineet = esineet;
     }
 
-    public ArrayList<Ihminen> getIhmiset() {
+    public ArrayList<Human> getIhmiset() {
         return ihmiset;
     }
 
-    public void setIhmiset(ArrayList<Ihminen> ihmiset) {
+    public void setIhmiset(ArrayList<Human> ihmiset) {
         this.ihmiset = ihmiset;
     }
 
