@@ -59,6 +59,12 @@ public class Naytto extends JPanel implements ActionListener{
                     }
                 }
                 //esineiden tulostus
+                for (int a = 0; a < kartta.getEsineet().size(); a++) {
+                    if (kartta.getEsineet().get(a).getX() == i &&
+                            kartta.getEsineet().get(a).getY() == j) {
+                        paintEsine(g);
+                    }
+                }
                 
                 xpixelit = xpixelit+25;
             }
