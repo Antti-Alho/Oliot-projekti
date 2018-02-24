@@ -1,13 +1,13 @@
 package oliot.projekti.kartta;
 
 import oliot.liikkuvatOliot.Esine;
-import oliot.liikkuvatOliot.Ihminen;
+import oliot.liikkuvatOliot.Human;
 
 public class Ruutu {
     private int x;
     private int y;
     private boolean seinä;
-    private Ihminen ihminen;
+    private Human ihminen;
     private Esine esine;
     
     public Ruutu naapuriN;
@@ -46,11 +46,11 @@ public class Ruutu {
         this.seinä = seinä;
     }
 
-    public Ihminen getIhminen() {
+    public Human getIhminen() {
         return ihminen;
     }
 
-    public void setIhminen(Ihminen ihminen) {
+    public void setIhminen(Human ihminen) {
         this.ihminen = ihminen;
     }
 
