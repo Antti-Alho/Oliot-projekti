@@ -61,7 +61,7 @@ public class Display extends JFrame {
         });
         add(naytto1, BorderLayout.CENTER);
         add(painikepaneeli, BorderLayout.SOUTH);
-        add(kokopaneeli, BorderLayout.CENTER);
+        add(kokopaneeli, BorderLayout.NORTH);
         
         pack();
         setVisible(true);    

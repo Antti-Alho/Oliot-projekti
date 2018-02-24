@@ -5,8 +5,11 @@
  */
 package oliot.projekti.ui;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -15,9 +18,17 @@ import javax.swing.JPanel;
  */
 public class MenuNaytto extends JPanel {
     
+    
     public MenuNaytto() {
         setPreferredSize(new Dimension(500,500));
-        setBackground(Color.WHITE);
+        
+        //backroungimage
+        setLayout(new BorderLayout());
+        JLabel background = new JLabel (new ImageIcon
+        ("C:\\Users\\Eelis\\Pictures\\barfight.jpg")); //tähän url tai kuvan paikka
+        add(background);
+        background.setLayout(new FlowLayout());
+        
         
     }
     
