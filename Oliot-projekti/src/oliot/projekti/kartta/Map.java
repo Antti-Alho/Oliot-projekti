@@ -44,8 +44,8 @@ public class Map {
 
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
-            int x = r.nextInt(1+roomSize.max-2);
-            int y = r.nextInt(1+roomSize.max-2);
+            int x = r.nextInt(roomSize.max-2)+1;
+            int y = r.nextInt(roomSize.max-2)+1;
             Human ihminen = new Human(x, y);
             for (Human ihminen1 : ihmiset) {
                 if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
