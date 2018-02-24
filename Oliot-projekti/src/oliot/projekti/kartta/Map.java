@@ -7,8 +7,8 @@ import oliot.liikkuvatOliot.Ihminen;
 
 public class Kartta {
 
-    private int huoneidenMaara;
-    private IntRange huoneidenKoko;
+    private int roomAmount;
+    private IntRange roomSize;
     private ArrayList<Ruutu[]> koordinaatisto;
     private ArrayList<Esine> esineet;
     private ArrayList<Ihminen> ihmiset;
@@ -25,8 +25,9 @@ public class Kartta {
         this.r = new Random();
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
-        this.huoneidenMaara = huoneidenMaara;
-        this.huoneidenKoko = new IntRange(kokoMin, kokoMax);
+        this.roomAmount = huoneidenMaara;
+        this.roomSize = new IntRange(kokoMin, kokoMax);
+        this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiIhmiset(ihmistenMaara);
         generoiEsineet(esineidenMaara);
@@ -36,54 +37,53 @@ public class Kartta {
         this.r = new Random();
         this.ihmiset = new ArrayList<>();
         this.koordinaatisto = new ArrayList<>();
-        for (int i = 0; i < huoneidenMaara; i++) {
-            rooms.add(new Room(huoneidenKoko.arvoHuoneenKoko(), huoneidenKoko.arvoHuoneenKoko()));
+        for (int i = 0; i < roomAmount; i++) {
+            rooms.add(new Room(roomSize.randomSize(), roomSize.randomSize()));
         }
     }
 
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
-            int x = r.nextInt(20);
-            int y = r.nextInt(20);
+            int x = r.nextInt(roomSize.max);
+            int y = r.nextInt(roomSize.max);
             Ihminen ihminen = new Ihminen(x, y);
             for (Ihminen ihminen1 : ihmiset) {
                 if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
                     ihminen.setX(ihminen.getX() + 1);
                 }
             }
-            
             ihmiset.add(ihminen);
         }
     }
-    //ei toimi vielä älä koske antti hoitaa
+    
+    //katsoo huoneiden lukumaarän luo jokaisen huoneen erikseen, 
+    //asettelee ne vierekkäin ja
+    //sijoittaa huoneiden väliin käytävän
+    
     public void yhdistaHuoneet(){
-        int korkein = 0;
-        int levein = 0;
-        
-        for (int i = 0; i < rooms.size(); i++) {
-            
-            Room room = rooms.get(i);
-            for (int j = 0; j < room.getHeight()+korkein; j++) {
-                Ruutu[] a = new Ruutu[room.getWidth()];
-                for (int l = 0; l < room.getWidth()+levein; l++) {
-                    if(j == 0 || j == room.getHeight()){
-                        Ruutu ruutu = new Ruutu(j, l, true);
-                    }else if(l == 0 || l == room.getWidth()) {
-                        Ruutu ruutu = new Ruutu(j, l, true);
-                    } else {
-                        Ruutu ruutu = new Ruutu(j, l, false);
-                    }
-                }
-            }
-            korkein = korkein + room.getHeight();
+        int xhuoneet = 0;
+        int yhuoneet = 0;
+        int a;
+        int b;
+        for (int i = 0; i < roomAmount; i++) {
+            a = roomSize.randomSize();
+            b = roomSize.randomSize();
+            Room room = new Room(a , b);
+            room.setKoordinaatisto(generoiKartta(a, b));
+            rooms.add(room);
         }
+        
     }
+    
+    public void yhdistaRuudut(){
+        
+    }
+    
     public ArrayList<Ruutu[]> getKoordinaatisto(){
         return this.koordinaatisto;
     }
 
-    //luo yhden huoneen jolla testataan muuta toiminnallisuutta!
-    //älä anna liian pientä kokoa
+    //ajetaan kerran luonnin yhteydessä
     public ArrayList<Ruutu[]> generoiKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
@@ -102,12 +102,12 @@ public class Kartta {
             }
             koordinaatisto.add(ruudut);
         }
-        generoiIhmiset(20);
         return this.koordinaatisto;
     }
 
     @Override
     public String toString(){
+        
         String a = "";
 
         for (Ruutu[] ruutus : koordinaatisto) {
@@ -116,25 +116,23 @@ public class Kartta {
             }
             a = a + System.lineSeparator();
         }
-
         return a;
-
     }
     
     public int getHuoneidenMaara() {
-        return huoneidenMaara;
+        return roomAmount;
     }
 
     public void setHuoneidenMaara(int huoneidenMaara) {
-        this.huoneidenMaara = huoneidenMaara;
+        this.roomAmount = huoneidenMaara;
     }
 
     public IntRange getHuoneidenKoko() {
-        return huoneidenKoko;
+        return roomSize;
     }
 
     public void setHuoneidenKoko(IntRange huoneidenKoko) {
-        this.huoneidenKoko = huoneidenKoko;
+        this.roomSize = huoneidenKoko;
     }
 
     public ArrayList<Esine> getEsineet() {
@@ -154,6 +152,9 @@ public class Kartta {
     }
 
     private void generoiEsineet(int esineidenMaara) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < esineidenMaara; i++) {
+            Esine e = new Esine(r.nextInt(roomSize.max), r.nextInt(roomSize.max));
+            esineet.add(e);
+        }
     }
 }
