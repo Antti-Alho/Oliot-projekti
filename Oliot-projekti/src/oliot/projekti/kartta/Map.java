@@ -153,7 +153,7 @@ public class Map {
 
     private void generoiEsineet(int esineidenMaara) {
         for (int i = 0; i < esineidenMaara; i++) {
-            Esine e = new Esine(r.nextInt(roomSize.max), r.nextInt(roomSize.max));
+            Esine e = new Esine(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
             esineet.add(e);
         }
     }
