@@ -1,17 +1,58 @@
 
 package oliot.liikkuvatOliot;
 import java.util.Random;
-public class Ihminen {
+public class Human {
     private int humala;
     private int enu;
     private int str;
     private int intell;
     private int cha;
+    private int tavoite;
+   
     private Esine esine;
     private int x;
     private int y;
     Random rand = new Random();
+    
+    public Human(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
+        this.str = str;
+        this.intell = itelligence;
+        this.cha = cha;
+        this.humala = humala;
+        this.enu = enu;
+        this.x = x;
+        this.y = y;
+        
+        this.tavoite = 1;
+    }
+    public Human (int x, int y){
+        this.x = x;
+        this.y = y;
+        ArvoStatit();
+        
+        this.tavoite = 1;
+    }
 
+    public void tavoiteSaavutettu(){
+        if (this.tavoite == 1){
+            this.tavoite = 2;
+        } else if (this.tavoite == 2) {
+            this.tavoite = 3;
+        } else if (this.tavoite == 3) {
+            this.tavoite = 1;
+        } else {
+            this.tavoite = 1;
+        }
+    }
+    
+    public void ArvoStatit(){
+        this.cha = rand.nextInt(10)+1;
+        this.enu = rand.nextInt(10)+1;
+        this.humala = rand.nextInt(10)+1;
+        this.intell = rand.nextInt(10)+1;
+        this.str = rand.nextInt(10)+1;
+    }
+    
     public int getX() {
         return x;
     }
@@ -53,22 +94,7 @@ public class Ihminen {
     public void setEsine(Esine esine) {
         this.esine = esine;
     }
-
-    public Ihminen(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
-        this.str = str;
-        this.intell = itelligence;
-        this.cha = cha;
-        this.humala = humala;
-        this.enu = enu;
-        this.x = x;
-        this.y = y;
-    }
-    public Ihminen (int x, int y){
-        this.x = x;
-        this.y = y;
-        ArvoStatit();
-    }
-
+    
     public int getStr() {
         return this.str;
     }
@@ -90,13 +116,6 @@ public class Ihminen {
     }
 
     public void setCha(int cha) {
-        this.cha = cha;
+        this.cha = cha;   
     }
-    public void ArvoStatit(){
-        this.cha = rand.nextInt(10)+1;
-        this.enu = rand.nextInt(10)+1;
-        this.humala = rand.nextInt(10)+1;
-        this.intell = rand.nextInt(10)+1;
-        this.str = rand.nextInt(10)+1;
-    }               
 }

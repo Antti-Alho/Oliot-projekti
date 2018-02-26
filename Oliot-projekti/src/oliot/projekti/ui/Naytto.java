@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
-import oliot.liikkuvatOliot.Ihminen;
+import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.LiikkuvienOhjaaja;
-import oliot.projekti.kartta.Kartta;
+import oliot.projekti.kartta.Map;
 import oliot.projekti.kartta.Ruutu;
 
 /**
@@ -22,10 +22,9 @@ import oliot.projekti.kartta.Ruutu;
  * @author melto
  */
 public class Naytto extends JPanel implements ActionListener{
-    Kartta kartta;
+    Map kartta;
     private ArrayList<Ruutu[]> ruudut;
-    final private int x;
-    final private int y;
+    
     private int xpixelit = 50;
     private int ypixelit = 50;
     Timer timer=new Timer(500, this);
@@ -33,13 +32,12 @@ public class Naytto extends JPanel implements ActionListener{
     int frameLaskuri = 0;
     
     
-    public Naytto(Kartta kartta) {
+    public Naytto(Map kartta) {
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
         setPreferredSize(new Dimension(1000,1000));
         setBackground(Color.BLUE);
-        x=200; y=150;
         this.kartta = kartta;
-        this.ruudut = kartta.generoiKartta(20, 20);
+        this.ruudut = kartta.getKoordinaatisto();
         timer.start();// Start the timer here.
     }
     
@@ -47,16 +45,27 @@ public class Naytto extends JPanel implements ActionListener{
         super.paintComponent(g);
         for (int i = 0; i < this.ruudut.size(); i++) {
             Ruutu[] rivi =this.ruudut.get(i);
-
+            
+            //seinien tulostus
             for (int j = 0; j < rivi.length; j++) {
                 if(rivi[j].isSeinä()){
                     paintHuone(g);
                 }
+                //ihmisten tulostus
                 for (int k = 0; k < kartta.getIhmiset().size(); k++) {
-                    if(kartta.getIhmiset().get(k).getX() == i && kartta.getIhmiset().get(k).getY() == j) {
-                        paintIhminen(g);
+                    if(kartta.getIhmiset().get(k).getX() == i && 
+                            kartta.getIhmiset().get(k).getY() == j) {
+                        paintIhminen(g);       
                     }
                 }
+                //esineiden tulostus
+                for (int a = 0; a < kartta.getEsineet().size(); a++) {
+                    if (kartta.getEsineet().get(a).getX() == i &&
+                            kartta.getEsineet().get(a).getY() == j) {
+                        paintEsine(g);
+                    }
+                }
+                
                 xpixelit = xpixelit+25;
             }
             xpixelit = 50;
@@ -80,12 +89,17 @@ public class Naytto extends JPanel implements ActionListener{
         g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     
+    public void paintEsine(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillOval(xpixelit, ypixelit, 10, 10);
+    }
+    
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource()==timer){
             System.out.println(frameLaskuri);
             frameLaskuri++;
             System.out.println("ihmisiä on " + kartta.getIhmiset().size());
-            ArrayList<Ihminen> Liikuta = ohjaaja.Liikuta();
+            ArrayList<Human> Liikuta = ohjaaja.Liikuta();
             kartta.setIhmiset(Liikuta);
             repaint();// this will call at every 1 second
         }
