@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
+import oliot.liikkuvatOliot.Olut;
 
 public class Map {
 
     private int roomAmount;
     private IntRange roomSize;
     private ArrayList<Ruutu[]> koordinaatisto;
-    private ArrayList<Esine> esineet;
+    private ArrayList<Olut> esineet;
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
     Random r;
@@ -30,7 +31,7 @@ public class Map {
         this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiIhmiset(ihmistenMaara);
-        generoiEsineet(esineidenMaara);
+        generoiOluet(esineidenMaara);
     }
     
     public Map() {
@@ -53,6 +54,7 @@ public class Map {
                 }
             }
             ihmiset.add(ihminen);
+            ihminen.ArvoStatit();
         }
     }
     
@@ -135,11 +137,11 @@ public class Map {
         this.roomSize = huoneidenKoko;
     }
 
-    public ArrayList<Esine> getEsineet() {
+    public ArrayList<Olut> getEsineet() {
         return esineet;
     }
 
-    public void setEsineet(ArrayList<Esine> esineet) {
+    public void setEsineet(ArrayList<Olut> esineet) {
         this.esineet = esineet;
     }
 
@@ -151,9 +153,9 @@ public class Map {
         this.ihmiset = ihmiset;
     }
 
-    private void generoiEsineet(int esineidenMaara) {
+    private void generoiOluet(int esineidenMaara) {
         for (int i = 0; i < esineidenMaara; i++) {
-            Esine e = new Esine(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
+            Olut e = new Olut(10,r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
             esineet.add(e);
         }
     }

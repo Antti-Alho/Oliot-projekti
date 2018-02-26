@@ -19,6 +19,8 @@ public class LiikkuvienOhjaaja {
         for (int i = 0; i < ihmiset.size(); i++) {
             human = ihmiset.get(i);
             human = humalaAskel(human);
+            iHaveThePower(human);
+            
             
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
@@ -102,6 +104,22 @@ public class LiikkuvienOhjaaja {
         if (a.getStr() > b.getStr() ){
             return b;
         } else return a;
+    }
+    //Tällä metodilla juodaan olutta
+    public void iHaveThePower(Human human){
+        ArrayList<Olut> oluet = map.getEsineet();
+        ArrayList<Olut> juodutOluet = new ArrayList<>();
+        for (Olut olut : oluet) {
+            if (human.getX() == olut.getX() && human.getY() == olut.getY())
+                juodutOluet.add(olut);
+                human.setOlut(olut);
+            
+        }
+        oluet.removeAll(juodutOluet);
+        if (human.getOlut()!= null){
+            human.setHumala(human.getHumala()+1);
+            human.getOlut().setMaara(human.getOlut().getMaara() - 1);
+        }
     }
 
 }

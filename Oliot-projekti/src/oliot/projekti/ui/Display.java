@@ -47,7 +47,7 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 naytto1.setVisible(false);
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
-                Map kartta = new Map(20, 20, TextFieldValue, 20, 20);
+                Map kartta = new Map(TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue);
                 Naytto naytto = new Naytto(kartta);
                 add(naytto, BorderLayout.CENTER);
                 pack();
