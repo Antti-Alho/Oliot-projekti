@@ -11,16 +11,27 @@ public class Ruutu {
     private Human ihminen;
     private Esine esine;
     
-    public Ruutu naapuriN;
-    public Ruutu naapuriS;
-    public Ruutu naapuriW;
-    public Ruutu naapuriE;
+    private Ruutu route;
+    private Ruutu naapuriN;
+    private Ruutu naapuriS;
+    private Ruutu naapuriW;
+    private Ruutu naapuriE;
+    private int d;
+
+    public int getD() {
+        return d;
+    }
+
+    public void setD(int d) {
+        this.d = d;
+    }
     
 
     public Ruutu(int x, int y, boolean seinä) {
         this.x = x;
         this.y = y;
         this.seinä = seinä;
+        this.d = 0;
     }
 
     public int getX() {
@@ -93,6 +104,14 @@ public class Ruutu {
 
     public void setNaapuriE(Ruutu naapuriE) {
         this.naapuriE = naapuriE;
+    }
+   
+    public Ruutu getRoute() {
+        return route;
+    }
+
+    public void setRoute(Ruutu route) {
+        this.route = route;
     }
     
     public ArrayList<Ruutu> getNaapuritMP(){

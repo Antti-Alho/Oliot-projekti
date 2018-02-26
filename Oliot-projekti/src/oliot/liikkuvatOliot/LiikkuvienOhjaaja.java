@@ -9,11 +9,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class LiikkuvienOhjaaja {
-    Random random = new Random();
+    Random random;
     Map map;
+    
     
     public LiikkuvienOhjaaja(Map kartta){
         this.map = kartta;
+        this.random = new Random();
+        nollaaReitti();
     }
     
     // liikuttaa ihmisiä ja tappeluita
@@ -31,9 +34,10 @@ public class LiikkuvienOhjaaja {
         for (int i = 0; i < ihmiset.size(); i++) {
             human = ihmiset.get(i);
             yksiAskel(human);
-            humalaAskel(human);
             iHaveThePower(human);
-            
+            if(human.getHumala() >= random.nextInt(10)){
+                humalaAskel(human);
+            }
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
                     if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
@@ -67,19 +71,30 @@ public class LiikkuvienOhjaaja {
         int yStart = ihminen.getY();
         int caseValue = ihminen.getTavoite();
         int pieninEtaisyys = map.getMaxZize()^2;
+        Ruutu start = map.getKoord().get(xStart)[yStart];
+        int goalX;
+        int goalY;
+        Ruutu goalR = start;
+        
+        int suunta = 4;
         
         //haluaa olutta
         if (caseValue == 1) {
-            Olut maali = ihminen.getOlut();
+            Olut goal = ihminen.getOlut();
             for (int i = 0; i < map.getOluet().size(); i++) {
-                Ruutu start = map.getKoord().get(xStart)[yStart];
                 Ruutu end = map.getKoord().get(map.getOluet().get(i).getX())[map.getOluet().get(i).getX()];
                 if (etaisyys(start,end) <= pieninEtaisyys) {
-                    maali = map.getOluet().get(i);
+                    goal = map.getOluet().get(i);
+                    goalX = goal.getX();
+                    goalY = goal.getY();
+                    goalR = map.getKoord().get(goalX)[goalY];
                 }
             }
-            if (maali != null){
-                return suunta(maali);
+        
+            if (goal != null){
+                suunta = suunta(start, goalR);
+                nollaaReitti();
+                return suunta;
             } else return 4;
         }
         //haluaa istua
@@ -99,13 +114,10 @@ public class LiikkuvienOhjaaja {
     // 2 = W
     // 3 = N
     // 4 = pysyy paikallaan
-    public int suunta(Olut olut){
-        return 4;
-    }
-    
-    public int etaisyys(Ruutu StartNode, Ruutu goalNode){
+    public int suunta(Ruutu StartNode, Ruutu goalNode){
         Queue<Ruutu> que = new LinkedList<>(); //tarkastelujono
         HashMap<Ruutu,Integer> z = new HashMap<>(); //etäisyydet solmuihin
+        
         int syvyys = 0;
         que.add(StartNode);
         while (!que.isEmpty()) {
@@ -114,19 +126,64 @@ public class LiikkuvienOhjaaja {
             for (Ruutu ruutu : sNaapurit) {
                 if(que.contains(ruutu) == false){
                     if(z.containsKey(ruutu) == false){
+                        ruutu.setRoute(s);
+                        ruutu.setD(s.getD()+1);
+                        syvyys = s.getD()+1;
                         que.add(ruutu);
                     }
                 }
             }
             z.put(s, syvyys);
-            syvyys++;
-            if (z.size() >= 500) {
-                System.out.println(z.size());
-                System.out.println(que.size());
-                break;
+        }
+        
+        do {
+            z.get(goalNode);
+            goalNode = goalNode.getRoute();
+            System.out.println("kyrpäsaatana");
+        } while (goalNode.getRoute().isSeinä() == true);
+        if (goalNode.getRoute() == goalNode.getNaapuriS()){
+            System.out.println("hvtkikihiri");
+            return 3;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriE()){
+            return 2;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriN()){
+            return 1;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriW()){
+            return 0;
+        } else return 4;
+    }
+    
+    public int etaisyys(Ruutu StartNode, Ruutu goalNode){
+        Queue<Ruutu> que = new LinkedList<>(); //tarkastelujono
+        HashMap<Ruutu,Integer> z = new HashMap<>(); //etäisyydet solmuihin
+        
+        int syvyys = 0;
+        que.add(StartNode);
+        while (!que.isEmpty()) {
+            Ruutu s = que.remove();
+            ArrayList<Ruutu> sNaapurit = s.getNaapuritMP();
+            for (Ruutu ruutu : sNaapurit) {
+                if(que.contains(ruutu) == false){
+                    if(z.containsKey(ruutu) == false){
+                        ruutu.setRoute(s);
+                        ruutu.setD(s.getD()+1);
+                        syvyys = s.getD()+1;
+                        que.add(ruutu);
+                    }
+                }
             }
+            z.put(s, syvyys);
         }
         return z.get(goalNode);
+    }
+    
+    public void nollaaReitti(){
+        for (Ruutu[] ruudut : map.getKoord()) {
+            for (Ruutu ruutu : ruudut) {
+                ruutu.setRoute(new Ruutu(1000, 1000, true));
+                ruutu.setD(0);
+            }
+        }
     }
     
     public void humalaAskel(Human human){
