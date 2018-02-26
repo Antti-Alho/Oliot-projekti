@@ -5,6 +5,7 @@ import java.util.Random;
 import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
+import oliot.liikkuvatOliot.TappeluOhjaaja;
 
 public class Map {
 
@@ -14,6 +15,7 @@ public class Map {
     private ArrayList<Olut> esineet;
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
+    private ArrayList<TappeluOhjaaja> tappelut;
     Random r;
 
     public Map(
@@ -31,7 +33,9 @@ public class Map {
         this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiIhmiset(ihmistenMaara);
+
         generoiOluet(esineidenMaara);
+        this.tappelut = new ArrayList();
     }
     
     public Map() {
@@ -159,4 +163,13 @@ public class Map {
             esineet.add(e);
         }
     }
-}
+    
+    public ArrayList<TappeluOhjaaja> getTappelut() {
+        return tappelut;
+    }
+
+    public void setTappelut(ArrayList<TappeluOhjaaja> tappelut) {
+        this.tappelut = tappelut;
+    }
+    
+}   

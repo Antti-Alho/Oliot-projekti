@@ -34,7 +34,7 @@ public class Naytto extends JPanel implements ActionListener{
     
     public Naytto(Map kartta) {
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
-        setPreferredSize(new Dimension(1000,1000));
+        setPreferredSize(new Dimension(600,600));
         setBackground(Color.BLUE);
         this.kartta = kartta;
         this.ruudut = kartta.getKoordinaatisto();
@@ -65,6 +65,12 @@ public class Naytto extends JPanel implements ActionListener{
                         paintEsine(g);
                     }
                 }
+                for (int a = 0; a < kartta.getTappelut().size(); a++) {
+                    if (kartta.getTappelut().get(a).getX() == i &&
+                            kartta.getTappelut().get(a).getY() == j) {
+                        paintTappelu(g);
+                    }
+                }
                 
                 xpixelit = xpixelit+25;
             }
@@ -92,6 +98,11 @@ public class Naytto extends JPanel implements ActionListener{
     public void paintEsine(Graphics g) {
         g.setColor(Color.GREEN);
         g.fillOval(xpixelit, ypixelit, 10, 10);
+    }
+    
+    public void paintTappelu(Graphics g) {
+        g.setColor(Color.RED);
+        g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     
     public void actionPerformed(ActionEvent ev){
