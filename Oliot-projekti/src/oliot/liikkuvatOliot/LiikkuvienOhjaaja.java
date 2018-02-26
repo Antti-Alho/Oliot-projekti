@@ -109,15 +109,22 @@ public class LiikkuvienOhjaaja {
         int syvyys = 0;
         que.add(StartNode);
         while (!que.isEmpty()) {
-            Ruutu s = que.poll();
+            Ruutu s = que.remove();
             ArrayList<Ruutu> sNaapurit = s.getNaapuritMP();
             for (Ruutu ruutu : sNaapurit) {
-                if(!z.containsKey(ruutu)){
-                que.add(ruutu);
+                if(que.contains(ruutu) == false){
+                    if(z.containsKey(ruutu) == false){
+                        que.add(ruutu);
+                    }
                 }
             }
             z.put(s, syvyys);
             syvyys++;
+            if (z.size() >= 500) {
+                System.out.println(z.size());
+                System.out.println(que.size());
+                break;
+            }
         }
         return z.get(goalNode);
     }

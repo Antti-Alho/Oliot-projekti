@@ -31,7 +31,7 @@ public class Human {
         this.hp = hp;
         this.x = x;
         this.y = y;
-        
+        //1 juo 2 istu 3 kuse
         this.tavoite = 1;
     }
     public Human (int x, int y){

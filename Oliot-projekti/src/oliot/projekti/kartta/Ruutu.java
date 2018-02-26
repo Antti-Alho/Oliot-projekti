@@ -97,10 +97,10 @@ public class Ruutu {
     
     public ArrayList<Ruutu> getNaapuritMP(){
         ArrayList<Ruutu> a = new ArrayList<>();
-        if(this.naapuriN != null)a.add(this.naapuriN);
-        if(this.naapuriE != null)a.add(this.naapuriE);
-        if(this.naapuriS != null)a.add(this.naapuriS);
-        if(this.naapuriW != null)a.add(this.naapuriW);
+        if(this.naapuriN.seinä == false)a.add(this.naapuriN);
+        if(this.naapuriE.seinä == false)a.add(this.naapuriE);
+        if(this.naapuriS.seinä == false)a.add(this.naapuriS);
+        if(this.naapuriW.seinä == false)a.add(this.naapuriW);
         return a;
     }
     
