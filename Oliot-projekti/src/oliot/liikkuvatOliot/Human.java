@@ -3,7 +3,7 @@ package oliot.liikkuvatOliot;
 import java.util.Random;
 public class Human {
     private int humala;
-    private int enu;
+    private int hp;
     private int str;
     private int intell;
     private int cha;
@@ -14,12 +14,12 @@ public class Human {
     private int y;
     Random rand = new Random();
     
-    public Human(int str, int itelligence, int cha, int humala, int enu, int x, int y) {
+    public Human(int str, int itelligence, int cha, int humala, int hp, int x, int y) {
         this.str = str;
         this.intell = itelligence;
         this.cha = cha;
         this.humala = humala;
-        this.enu = enu;
+        this.hp = hp;
         this.x = x;
         this.y = y;
         
@@ -47,7 +47,7 @@ public class Human {
     
     public void ArvoStatit(){
         this.cha = rand.nextInt(10)+1;
-        this.enu = rand.nextInt(10)+1;
+        this.hp = rand.nextInt(100)+1;
         this.humala = rand.nextInt(10)+1;
         this.intell = rand.nextInt(10)+1;
         this.str = rand.nextInt(10)+1;
@@ -79,11 +79,11 @@ public class Human {
     }
 
     public int getEnu() {
-        return enu;
+        return hp;
     }
 
     public void setEnu(int enu) {
-        this.enu = enu;
+        this.hp = enu;
     }
     
     //testaa onko null
