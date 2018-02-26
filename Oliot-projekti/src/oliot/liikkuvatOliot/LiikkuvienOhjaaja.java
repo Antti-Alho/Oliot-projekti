@@ -33,10 +33,11 @@ public class LiikkuvienOhjaaja {
         
         for (int i = 0; i < ihmiset.size(); i++) {
             human = ihmiset.get(i);
-            yksiAskel(human);
             iHaveThePower(human);
+            yksiAskel(human);
+            nollaaReitti();
             if(human.getHumala() >= random.nextInt(10)){
-                humalaAskel(human);
+                //humalaAskel(human);
             }
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
@@ -71,7 +72,7 @@ public class LiikkuvienOhjaaja {
         int yStart = ihminen.getY();
         int caseValue = ihminen.getTavoite();
         int pieninEtaisyys = map.getMaxZize()^2;
-        Ruutu start = map.getKoord().get(xStart)[yStart];
+        Ruutu start = map.getKoord().get(yStart)[xStart];
         int goalX;
         int goalY;
         Ruutu goalR = start;
@@ -82,15 +83,17 @@ public class LiikkuvienOhjaaja {
         if (caseValue == 1) {
             Olut goal = ihminen.getOlut();
             for (int i = 0; i < map.getOluet().size(); i++) {
-                Ruutu end = map.getKoord().get(map.getOluet().get(i).getX())[map.getOluet().get(i).getX()];
+                Ruutu end = map.getKoord().get(map.getOluet().get(i).getY())[map.getOluet().get(i).getX()];
                 if (etaisyys(start,end) <= pieninEtaisyys) {
+                    nollaaReitti();
+                    pieninEtaisyys = etaisyys(start,end);
+                    nollaaReitti();
                     goal = map.getOluet().get(i);
                     goalX = goal.getX();
                     goalY = goal.getY();
-                    goalR = map.getKoord().get(goalX)[goalY];
+                    goalR = map.getKoord().get(goalY)[goalX];
                 }
             }
-        
             if (goal != null){
                 suunta = suunta(start, goalR);
                 nollaaReitti();
@@ -135,21 +138,18 @@ public class LiikkuvienOhjaaja {
             }
             z.put(s, syvyys);
         }
-        
-        do {
-            z.get(goalNode);
+        syvyys = z.get(goalNode);
+        for (int i = 0; i < syvyys; i++) {
             goalNode = goalNode.getRoute();
-            System.out.println("kyrpäsaatana");
-        } while (goalNode.getRoute().isSeinä() == true);
-        if (goalNode.getRoute() == goalNode.getNaapuriS()){
-            System.out.println("hvtkikihiri");
-            return 3;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriE()){
-            return 2;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriN()){
-            return 1;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriW()){
+        }
+        if (goalNode.getRoute() == goalNode.getNaapuriE()){
             return 0;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriE()){
+            return 4;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriN()){
+            return 4;
+        } else if (goalNode.getRoute() == goalNode.getNaapuriW()){
+            return 4;
         } else return 4;
     }
     
@@ -172,7 +172,7 @@ public class LiikkuvienOhjaaja {
                     }
                 }
             }
-            z.put(s, syvyys);
+            z.put(s, s.getD());
         }
         return z.get(goalNode);
     }

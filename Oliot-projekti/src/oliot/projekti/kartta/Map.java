@@ -47,11 +47,11 @@ public class Map {
             int x = r.nextInt(roomSize.max-2)+1;
             int y = r.nextInt(roomSize.max-2)+1;
             Human ihminen = new Human(x, y);
-            for (Human ihminen1 : ihmiset) {
+            /*for (Human ihminen1 : ihmiset) {
                 if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
                     ihminen.setX(ihminen.getX() + 1);
                 }
-            }
+            }*/
             ihmiset.add(ihminen);
             ihminen.ArvoStatit();
         }
