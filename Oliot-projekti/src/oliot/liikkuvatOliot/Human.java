@@ -9,6 +9,14 @@ public class Human {
     private int cha;
     private int tavoite;
     private Olut olut;
+
+    public int getTavoite() {
+        return tavoite;
+    }
+
+    public void setTavoite(int tavoite) {
+        this.tavoite = tavoite;
+    }
    
     private Esine esine;
     private int x;

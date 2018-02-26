@@ -37,7 +37,7 @@ public class Naytto extends JPanel implements ActionListener{
         setPreferredSize(new Dimension(600,600));
         setBackground(Color.BLUE);
         this.kartta = kartta;
-        this.ruudut = kartta.getKoordinaatisto();
+        this.ruudut = kartta.getKoord();
         timer.start();// Start the timer here.
     }
     
@@ -59,9 +59,9 @@ public class Naytto extends JPanel implements ActionListener{
                     }
                 }
                 //esineiden tulostus
-                for (int a = 0; a < kartta.getEsineet().size(); a++) {
-                    if (kartta.getEsineet().get(a).getX() == i &&
-                            kartta.getEsineet().get(a).getY() == j) {
+                for (int a = 0; a < kartta.getOluet().size(); a++) {
+                    if (kartta.getOluet().get(a).getX() == i &&
+                            kartta.getOluet().get(a).getY() == j) {
                         paintEsine(g);
                     }
                 }

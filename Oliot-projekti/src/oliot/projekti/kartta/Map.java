@@ -16,8 +16,10 @@ public class Map {
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
     private ArrayList<TappeluOhjaaja> tappelut;
+    private int maxZize;
     Random r;
-
+    
+    // alustaa kaiken käyttövalmiiksi 
     public Map(
             int huoneidenMaara,
             int kokoMin,
@@ -26,6 +28,7 @@ public class Map {
             int ihmistenMaara
     ) {
         this.r = new Random();
+        this.maxZize = kokoMax;
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
         this.roomAmount = huoneidenMaara;
@@ -33,20 +36,12 @@ public class Map {
         this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiIhmiset(ihmistenMaara);
-
+        yhdistaRuudut();
         generoiOluet(esineidenMaara);
         this.tappelut = new ArrayList();
     }
-    
-    public Map() {
-        this.r = new Random();
-        this.ihmiset = new ArrayList<>();
-        this.koordinaatisto = new ArrayList<>();
-        for (int i = 0; i < roomAmount; i++) {
-            rooms.add(new Room(roomSize.randomSize(), roomSize.randomSize()));
-        }
-    }
-
+        
+    //generoi huoneeseen ihmisiä
     public void generoiIhmiset(int ihmisia){
         for (int i = 0; i <=ihmisia; i++){
             int x = r.nextInt(roomSize.max-2)+1;
@@ -59,6 +54,15 @@ public class Map {
             }
             ihmiset.add(ihminen);
             ihminen.ArvoStatit();
+        }
+    }
+    
+    // toistaiseksi täyttää huoneen kaljalla
+    //tarkoitus laittaa kaljaa baaritiskille kun baaritiski on tyhjä kunhan baaritiski on olemassa
+    private void generoiOluet(int oluenMaara) {
+        for (int i = 0; i < oluenMaara; i++) {
+            Olut e = new Olut(10,r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
+            esineet.add(e);
         }
     }
     
@@ -81,15 +85,24 @@ public class Map {
         
     }
     
+    //luo ruuduista verkon etäisyyden ja reitinhakua varten
     public void yhdistaRuudut(){
-        
+        ArrayList<Ruutu[]> rivit = this.koordinaatisto;
+        for (int i = 1; i < rivit.size()-1; i++) {
+            for (int j = 1; j < rivit.get(i).length-1; j++) {
+                rivit.get(i)[j].setNaapuriN(rivit.get(i-1)[j]);
+                rivit.get(i)[j].setNaapuriE(rivit.get(i)[j+1]);
+                rivit.get(i)[j].setNaapuriS(rivit.get(i+1)[j]);
+                rivit.get(i)[j].setNaapuriW(rivit.get(i)[j-1]);
+            }
+        }
     }
     
-    public ArrayList<Ruutu[]> getKoordinaatisto(){
+    public ArrayList<Ruutu[]> getKoord(){
         return this.koordinaatisto;
     }
 
-    //ajetaan kerran luonnin yhteydessä
+    //ajetaan kerran luonnin yhteydessä asettelee seinät koordinaatistoon
     public ArrayList<Ruutu[]> generoiKartta(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
             Ruutu[] ruudut = new Ruutu[leveys];
@@ -111,6 +124,7 @@ public class Map {
         return this.koordinaatisto;
     }
 
+    //tulostaa koordinaatiston tekstimuodossa
     @Override
     public String toString(){
         
@@ -124,6 +138,8 @@ public class Map {
         }
         return a;
     }
+    
+    // getterit ja setterit
     
     public int getHuoneidenMaara() {
         return roomAmount;
@@ -141,7 +157,7 @@ public class Map {
         this.roomSize = huoneidenKoko;
     }
 
-    public ArrayList<Olut> getEsineet() {
+    public ArrayList<Olut> getOluet() {
         return esineet;
     }
 
@@ -156,13 +172,6 @@ public class Map {
     public void setIhmiset(ArrayList<Human> ihmiset) {
         this.ihmiset = ihmiset;
     }
-
-    private void generoiOluet(int esineidenMaara) {
-        for (int i = 0; i < esineidenMaara; i++) {
-            Olut e = new Olut(10,r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
-            esineet.add(e);
-        }
-    }
     
     public ArrayList<TappeluOhjaaja> getTappelut() {
         return tappelut;
@@ -170,6 +179,13 @@ public class Map {
 
     public void setTappelut(ArrayList<TappeluOhjaaja> tappelut) {
         this.tappelut = tappelut;
+    }
+    public int getMaxZize() {
+        return maxZize;
+    }
+
+    public void setMaxZize(int maxZize) {
+        this.maxZize = maxZize;
     }
     
 }   
