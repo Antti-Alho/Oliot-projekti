@@ -2,6 +2,7 @@ package oliot.projekti.kartta;
 
 import java.util.ArrayList;
 import java.util.Random;
+import oliot.liikkuvatOliot.Baaritiski;
 import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
@@ -16,6 +17,7 @@ public class Map {
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
     private ArrayList<TappeluOhjaaja> tappelut;
+    private ArrayList<Baaritiski> baaritiskit;
     private int maxZize;
     Random r;
     
@@ -31,10 +33,12 @@ public class Map {
         this.maxZize = kokoMax;
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
+        this.baaritiskit = new ArrayList<>();
         this.roomAmount = huoneidenMaara;
         this.roomSize = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
+        generoiBaaritiskit();
         generoiIhmiset(ihmistenMaara);
         yhdistaRuudut();
         generoiOluet(esineidenMaara);
@@ -186,6 +190,21 @@ public class Map {
 
     public void setMaxZize(int maxZize) {
         this.maxZize = maxZize;
+    }
+
+    public ArrayList<Baaritiski> getBaaritiskit() {
+        return baaritiskit;
+    }
+
+    public void setBaaritiskit(ArrayList<Baaritiski> baaritiskit) {
+        this.baaritiskit = baaritiskit;
+    }
+
+    private void generoiBaaritiskit() {
+        for (int i = 1; i < koordinaatisto.size()-1; i++) {
+            baaritiskit.add(new Baaritiski(1,i));
+        }
+ 
     }
     
 }   

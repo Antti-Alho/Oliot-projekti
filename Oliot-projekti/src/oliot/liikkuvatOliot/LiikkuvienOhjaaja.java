@@ -37,7 +37,7 @@ public class LiikkuvienOhjaaja {
             yksiAskel(human);
             nollaaReitti();
             if(human.getHumala() >= random.nextInt(10)){
-                //humalaAskel(human);
+                humalaAskel(human);
             }
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
@@ -61,9 +61,23 @@ public class LiikkuvienOhjaaja {
                     ihmiset.add(tappeluOhjaaja.getHuman());
                 }
             }
-            
         }
         map.getTappelut().removeAll(paattyneet);
+        
+        boolean lisataan = false;
+        for (int i = 0; i < map.getBaaritiskit().size(); i++) {
+            int x = map.getBaaritiskit().get(i).getX();
+            int y = map.getBaaritiskit().get(i).getY();
+            for (int j = 0; j < map.getOluet().size(); j++) {
+                if (lisataan){
+                    
+                }
+            }
+            if(lisataan){
+                
+            }
+            lisataan = false;
+        }
         return ihmiset;
     }
     
@@ -139,17 +153,17 @@ public class LiikkuvienOhjaaja {
             z.put(s, syvyys);
         }
         syvyys = z.get(goalNode);
-        for (int i = 0; i < syvyys; i++) {
+        for (int i = 0; i < syvyys-2; i++) {
             goalNode = goalNode.getRoute();
         }
-        if (goalNode.getRoute() == goalNode.getNaapuriE()){
+        if (goalNode.getRoute().hashCode() == goalNode.getNaapuriS().hashCode()){
+            return 3;
+        } else if (goalNode.getRoute().hashCode() == goalNode.getNaapuriE().hashCode()){
+            return 2;
+        } else if (goalNode.getRoute().hashCode() == goalNode.getNaapuriN().hashCode()){
+            return 1;
+        } else if (goalNode.getRoute().hashCode() == goalNode.getNaapuriW().hashCode()){
             return 0;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriE()){
-            return 4;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriN()){
-            return 4;
-        } else if (goalNode.getRoute() == goalNode.getNaapuriW()){
-            return 4;
         } else return 4;
     }
     
