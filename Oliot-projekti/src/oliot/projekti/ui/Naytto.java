@@ -74,7 +74,7 @@ public class Naytto extends JPanel implements ActionListener{
                 for (int a = 0; a < kartta.getBaaritiskit().size(); a++) {
                     if (kartta.getBaaritiskit().get(a).getX() == i &&
                             kartta.getBaaritiskit().get(a).getY() == j) {
-                        paintTappelu(g);
+                        paintBaaritiski(g);
                     }
                 }
                 
@@ -112,7 +112,7 @@ public class Naytto extends JPanel implements ActionListener{
     }
     
     public void paintBaaritiski(Graphics g){
-        g.setColor(Color.GREEN);
+        g.setColor(Color.gray);
         g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     

@@ -17,19 +17,19 @@ import javax.swing.JPanel;
  * @author melto
  */
 public class MenuNaytto extends JPanel {
-    
+    private ImageIcon image;
+    private JLabel background;
     
     public MenuNaytto() {
         setPreferredSize(new Dimension(500,500));
         
         //backroungimage
         setLayout(new BorderLayout());
-        JLabel background = new JLabel (new ImageIcon
-        ("C:\\Users\\Eelis\\Pictures\\barfight.jpg")); //tähän url tai kuvan paikka
+        image = new ImageIcon(getClass().getResource("Barfight.jpg"));
+        background = new JLabel (image);
+        
         add(background);
         background.setLayout(new FlowLayout());
-        
-        
     }
     
 }

@@ -45,6 +45,7 @@ public class Display extends JFrame {
         //nappi josta ohjelma alkaa
         aloita.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
                 naytto1.setVisible(false);
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
                 Map kartta = new Map(TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue);
@@ -54,6 +55,11 @@ public class Display extends JFrame {
                 naytto.setVisible(true);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 
+                StatitNaytto statitNaytto = new StatitNaytto(kartta);
+                add(statitNaytto, BorderLayout.EAST);
+                pack();
+                statitNaytto.setVisible(true);
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
         });
         add(naytto1, BorderLayout.CENTER);
@@ -63,7 +69,10 @@ public class Display extends JFrame {
         pack();
         setVisible(true);    
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    
+        naytto1.getRootPane().setDefaultButton(aloita);
     }
+    
 }
 
     
