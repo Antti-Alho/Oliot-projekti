@@ -64,5 +64,13 @@ public class TappeluOhjaaja {
         return ihmiset.size();
     }
 
+    public ArrayList<Human> getIhmiset() {
+        return ihmiset;
+    }
+
+    public void setIhmiset(ArrayList<Human> ihmiset) {
+        this.ihmiset = ihmiset;
+    }
+
 }   
 
