@@ -39,6 +39,8 @@ public class LiikkuvienOhjaaja {
             if(human.getHumala() >= random.nextInt(10)){
                 humalaAskel(human);
             }
+            istu(human);
+            nouse(human);
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
                     if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
@@ -116,9 +118,25 @@ public class LiikkuvienOhjaaja {
         }
         //haluaa istua
         if (caseValue == 2) {
-            System.out.println("joku haluaa istua vaikka tuolia ei ole keksitty");
-            return 4;
-        }
+            Tuoli goal = ihminen.getTuoli();
+            for (int i = 0; i < map.getTuolit().size(); i++) {
+                Ruutu end = map.getKoord().get(map.getTuolit().get(i).getY())[map.getTuolit().get(i).getX()];
+                if (etaisyys(start,end) <= pieninEtaisyys) {
+                    nollaaReitti();
+                    pieninEtaisyys = etaisyys(start,end);
+                    nollaaReitti();
+                    goal = map.getTuolit().get(i);
+                    goalX = goal.getX();
+                    goalY = goal.getY();
+                    goalR = map.getKoord().get(goalY)[goalX];
+                    }
+            }
+            if (goal != null){
+                suunta = suunta(start, goalR);
+                nollaaReitti();
+                return suunta;
+            } else return 4;
+        }    
         // haluaa kuselle
         if (caseValue == 3) {
             System.out.println("joku laski alleen");
@@ -285,6 +303,32 @@ public class LiikkuvienOhjaaja {
             human.setHumala(human.getHumala()+1);
             human.getOlut().setMaara(human.getOlut().getMaara() - 1);
         }
+    }
+    public void istu(Human human){
+        ArrayList<Tuoli> tuolit = map.getTuolit();
+        ArrayList<Human> istuvatIhmiset = map.getIstuvatIhmiset();
+        ArrayList<Human> ihmiset = map.getIhmiset();
+        for (Tuoli tuoli : tuolit) {
+            if (human.getX() == tuoli.getX() && human.getY() == tuoli.getY() && 
+                    human.getTavoite() == 2){
+                    ihmiset.remove(human);
+                    istuvatIhmiset.add(human);
+                    
+        }
+            
+        }
+    }
+    public void nouse(Human human){
+        ArrayList<Human> istuvatIhmiset = map.getIstuvatIhmiset();
+        ArrayList<Human> ihmiset = map.getIhmiset();
+                    if (human.getOlut().getMaara() > 0){
+                human.getOlut().setMaara(human.getOlut().getMaara() - 1);
+            }
+            else {
+                istuvatIhmiset.remove(human);
+                ihmiset.add(human);
+            }
+        
     }
 
 }

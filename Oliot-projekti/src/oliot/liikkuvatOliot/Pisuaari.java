@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package oliot.liikkuvatOliot;
-import java.util.Random;
+
 /**
  *
  * @author Petteri
  */
-public class Tuoli extends Esine{
-    int tuoliStr;
-    Random rand = new Random();
-    
-    public Tuoli(int x, int y) {
-        
-        super(x, y);
-        tuoliStr = rand.nextInt(10)+1;
+public class Pisuaari {
+    int x, y, kusenMaara;
+    public Pisuaari(int x, int y, int kusenMaara){
+        this.x = x;
+        this.y = y;
+        this.kusenMaara = kusenMaara;
     }
+    
 }

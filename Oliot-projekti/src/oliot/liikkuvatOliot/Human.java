@@ -9,6 +9,8 @@ public class Human {
     private int cha;
     private int tavoite;
     private Olut olut;
+    private Tuoli tuoli;
+    private Pisuaari pisuaari;
 
     public int getTavoite() {
         return tavoite;
@@ -57,7 +59,7 @@ public class Human {
     public void ArvoStatit(){
         this.cha = rand.nextInt(10)+1;
         this.humala = rand.nextInt(10);
-        this.hp = rand.nextInt(100)+1;
+        this.hp = rand.nextInt(50)+50;
         this.intell = rand.nextInt(10)+1;
         this.str = rand.nextInt(10)+1;
     }
@@ -134,6 +136,22 @@ public class Human {
 
     public void setOlut(Olut olut) {
         this.olut = olut;
+    }
+
+    public Tuoli getTuoli() {
+        return tuoli;
+    }
+
+    public void setTuoli(Tuoli tuoli) {
+        this.tuoli = tuoli;
+    }
+
+    public Pisuaari getPisuaari() {
+        return pisuaari;
+    }
+
+    public void setPisuaari(Pisuaari pisuaari) {
+        this.pisuaari = pisuaari;
     }
     
 }

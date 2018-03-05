@@ -7,6 +7,7 @@ import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
 import oliot.liikkuvatOliot.TappeluOhjaaja;
+import oliot.liikkuvatOliot.Tuoli;
 
 public class Map {
 
@@ -18,6 +19,9 @@ public class Map {
     private ArrayList<Room> rooms;
     private ArrayList<TappeluOhjaaja> tappelut;
     private ArrayList<Baaritiski> baaritiskit;
+    private ArrayList<Tuoli> tuolit;
+    private ArrayList<Human> istuvatIhmiset;
+    
     private int maxZize;
     Random r;
     
@@ -206,5 +210,26 @@ public class Map {
         }
  
     }
-    
+
+    public ArrayList<Tuoli> getTuolit() {
+        return tuolit;
+    }
+
+    public void setTuolit(ArrayList<Tuoli> tuolit) {
+        this.tuolit = tuolit;
+    }
+
+    public ArrayList<Human> getIstuvatIhmiset() {
+        return istuvatIhmiset;
+    }
+
+    public void setIstuvatIhmiset(ArrayList<Human> istuvatIhmiset) {
+        this.istuvatIhmiset = istuvatIhmiset;
+    }
+        private void generoiTuolit(int tuoliStrena) {
+        for (int i = 0; i < tuoliStrena; i++) {
+            Tuoli e = new Tuoli(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
+            tuolit.add(e);
+        }
+    }
 }   
