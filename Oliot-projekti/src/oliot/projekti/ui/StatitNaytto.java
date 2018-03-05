@@ -59,11 +59,9 @@ public class StatitNaytto extends JPanel implements ActionListener{
     }
     public String buildHumanhtml() {
         String tulos = "<HTML>";
-        int laskuri = 0;
         tulos = tulos + "Ihmiset , hp <br>"; 
         for (Human human : ihmiset) {
-            laskuri++;
-            tulos = tulos + "<br>" + "ihminen:" + laskuri + "," + human.getEnu();
+            tulos = tulos + "<br>" + human.getNimi() + "," + human.getEnu();
         }
         tulos = tulos + "<br> Tappelut: <br>";
         
@@ -72,7 +70,7 @@ public class StatitNaytto extends JPanel implements ActionListener{
             tappelulaskuri++;
             tulos = tulos + "<br>" + "Tappelu:" + tappelulaskuri;
             for (int i = 0; i < tappelu.getIhmiset().size(); i++) {
-                tulos = tulos + "<br>" + tappelu.getIhmiset().get(i).getEnu();
+                tulos = tulos + "<br>" + tappelu.getIhmiset().get(i).getNimi() + " " + tappelu.getIhmiset().get(i).getEnu();
             }
         }
         tulos = tulos + "</HTML>";

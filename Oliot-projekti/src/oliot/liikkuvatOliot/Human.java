@@ -1,6 +1,14 @@
 
 package oliot.liikkuvatOliot;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Human {
     private int humala;
     private int hp;
@@ -10,16 +18,8 @@ public class Human {
     private int tavoite;
     private Olut olut;
     private Tuoli tuoli;
-    private Pisuaari pisuaari;
-
-    public int getTavoite() {
-        return tavoite;
-    }
-
-    public void setTavoite(int tavoite) {
-        this.tavoite = tavoite;
-    }
-   
+    private Pisuaari pisuaari;   
+    private String nimi;
     private Esine esine;
     private int x;
     private int y;
@@ -35,13 +35,59 @@ public class Human {
         this.y = y;
         //1 juo 2 istu 3 kuse
         this.tavoite = 1;
+        try {
+            this.nimi = randomName();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Human.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     public Human (int x, int y){
         this.x = x;
         this.y = y;
         ArvoStatit();
         
         this.tavoite = 1;
+        try {
+            this.nimi = randomName();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Human.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+    
+    private String randomName() throws FileNotFoundException {
+        URL url = getClass().getResource("namesFirst.txt");
+        File file = new File(url.getPath());
+        Scanner sc = new Scanner(file);
+        URL url2 = getClass().getResource("namesLast.txt");
+        File file2 = new File(url2.getPath());
+        Scanner sc2 = new Scanner(file2);
+        String name = "";
+        
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> surNames = new ArrayList<>();
+        
+        while (sc.hasNextLine()) {
+            names.add(sc.nextLine());
+        }
+        while (sc2.hasNextLine()) {
+            surNames.add(sc2.nextLine());
+        }
+        int a = rand.nextInt(names.size());
+        name = name + names.get(a) + " ";
+        
+        a = rand.nextInt(surNames.size());
+        name = name + surNames.get(a);
+        System.out.println(name);
+        return name;
     }
 
     public void tavoiteSaavutettu(){
@@ -152,6 +198,14 @@ public class Human {
 
     public void setPisuaari(Pisuaari pisuaari) {
         this.pisuaari = pisuaari;
+    }
+    
+    public int getTavoite() {
+        return tavoite;
+    }
+
+    public void setTavoite(int tavoite) {
+        this.tavoite = tavoite;
     }
     
 }
