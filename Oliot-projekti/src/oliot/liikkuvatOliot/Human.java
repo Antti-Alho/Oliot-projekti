@@ -20,9 +20,9 @@ public class Human {
     private Tuoli tuoli;
     private Pisuaari pisuaari;   
     private String nimi;
-    private Esine esine;
     private int x;
     private int y;
+    private ArrayList<String> log;
     Random rand = new Random();
     
     public Human(int str, int itelligence, int cha, int humala, int hp, int x, int y) {
@@ -35,6 +35,7 @@ public class Human {
         this.y = y;
         //1 juo 2 istu 3 kuse
         this.tavoite = 1;
+        //nimeä arpoessa luetaan tekstitiedostoja.
         try {
             this.nimi = randomName();
         } catch (FileNotFoundException ex) {
@@ -48,6 +49,8 @@ public class Human {
         ArvoStatit();
         
         this.tavoite = 1;
+        this.log = new ArrayList<>();
+        this.log.add("<HTML>");
         try {
             this.nimi = randomName();
         } catch (FileNotFoundException ex) {
@@ -93,10 +96,13 @@ public class Human {
     public void tavoiteSaavutettu(){
         if (this.tavoite == 1){
             this.tavoite = 2;
+            this.log.add("Sain oluen!");
         } else if (this.tavoite == 2) {
             this.tavoite = 3;
+            this.log.add("Istuin alas juomaan");
         } else if (this.tavoite == 3) {
             this.tavoite = 1;
+            this.log.add("Haluaisin olutta!");
         } else {
             this.tavoite = 1;
         }
@@ -141,15 +147,6 @@ public class Human {
 
     public void setEnu(int enu) {
         this.hp = enu;
-    }
-    
-    //testaa onko null
-    public Esine getEsine() {
-        return esine;
-    }
-
-    public void setEsine(Esine esine) {
-        this.esine = esine;
     }
     
     public int getStr() {
@@ -207,5 +204,4 @@ public class Human {
     public void setTavoite(int tavoite) {
         this.tavoite = tavoite;
     }
-    
 }

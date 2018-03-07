@@ -4,7 +4,6 @@ import java.util.Queue;
 import oliot.projekti.kartta.Map;
 import oliot.projekti.kartta.Ruutu;
 import java.util.Random;
-import java.lang.Math;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -39,8 +38,8 @@ public class LiikkuvienOhjaaja {
             if(human.getHumala() >= random.nextInt(10)){
                 humalaAskel(human);
             }
-            istu(human);
-            nouse(human);
+            //istu(human);
+            //nouse(human);
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
                     if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
@@ -60,7 +59,7 @@ public class LiikkuvienOhjaaja {
             if (tappeluOhjaaja.getKoko() <= 1) {
                 paattyneet.add(tappeluOhjaaja);
                 if (tappeluOhjaaja.getKoko()== 1) {
-                    ihmiset.add(tappeluOhjaaja.getHuman());
+                    ihmiset.add(tappeluOhjaaja.getWinner());
                 }
             }
         }

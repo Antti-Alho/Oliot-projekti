@@ -3,7 +3,6 @@ package oliot.projekti.kartta;
 import java.util.ArrayList;
 import java.util.Random;
 import oliot.liikkuvatOliot.Baaritiski;
-import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
 import oliot.liikkuvatOliot.TappeluOhjaaja;
@@ -38,6 +37,8 @@ public class Map {
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
         this.baaritiskit = new ArrayList<>();
+        this.tuolit = new ArrayList<>();
+        this.istuvatIhmiset = new ArrayList<>();
         this.roomAmount = huoneidenMaara;
         this.roomSize = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList();
@@ -55,11 +56,6 @@ public class Map {
             int x = r.nextInt(roomSize.max-2)+1;
             int y = r.nextInt(roomSize.max-2)+1;
             Human ihminen = new Human(x, y);
-            /*for (Human ihminen1 : ihmiset) {
-                if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
-                    ihminen.setX(ihminen.getX() + 1);
-                }
-            }*/
             ihmiset.add(ihminen);
             ihminen.ArvoStatit();
         }
@@ -208,7 +204,6 @@ public class Map {
         for (int i = 1; i < koordinaatisto.size()-1; i++) {
             baaritiskit.add(new Baaritiski(1,i));
         }
- 
     }
 
     public ArrayList<Tuoli> getTuolit() {
@@ -226,7 +221,8 @@ public class Map {
     public void setIstuvatIhmiset(ArrayList<Human> istuvatIhmiset) {
         this.istuvatIhmiset = istuvatIhmiset;
     }
-        private void generoiTuolit(int tuoliStrena) {
+    
+    private void generoiTuolit(int tuoliStrena) {
         for (int i = 0; i < tuoliStrena; i++) {
             Tuoli e = new Tuoli(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
             tuolit.add(e);

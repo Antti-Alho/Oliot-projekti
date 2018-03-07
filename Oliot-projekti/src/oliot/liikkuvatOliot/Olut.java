@@ -9,15 +9,18 @@ package oliot.liikkuvatOliot;
  *
  * @author Petteri
  */
-public class Olut extends Esine{
+public class Olut{
     int maara;
+    int x;
+    int y;
 
     public int getMaara() {
         return maara;
     }
 
     public Olut(int maara, int x, int y) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
         this.maara = maara;
     }
 

@@ -9,13 +9,31 @@ import java.util.Random;
  *
  * @author Petteri
  */
-public class Tuoli extends Esine{
+public class Tuoli{
+    int x;
+    int y;
     int tuoliStr;
     Random rand = new Random();
     
     public Tuoli(int x, int y) {
-        
-        super(x, y);
+        this.x = x;
+        this.y = y;
         tuoliStr = rand.nextInt(10)+1;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
