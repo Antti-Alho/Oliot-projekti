@@ -204,4 +204,8 @@ public class Human {
     public void setTavoite(int tavoite) {
         this.tavoite = tavoite;
     }
+    @Override
+    public String toString(){
+        return this.x + " " +this.y;
+    }
 }

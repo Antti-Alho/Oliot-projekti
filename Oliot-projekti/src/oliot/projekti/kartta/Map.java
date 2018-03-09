@@ -13,6 +13,7 @@ public class Map {
     private int roomAmount;
     private IntRange roomSize;
     private ArrayList<Ruutu[]> koordinaatisto;
+    private ArrayList<String> tulostettavat;
     private ArrayList<Olut> esineet;
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
@@ -44,6 +45,7 @@ public class Map {
         this.koordinaatisto = new ArrayList();
         this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
         generoiBaaritiskit();
+        generateChairs(ihmistenMaara/2);
         generoiIhmiset(ihmistenMaara);
         yhdistaRuudut();
         generoiOluet(esineidenMaara);
@@ -129,6 +131,7 @@ public class Map {
     }
 
     //tulostaa koordinaatiston tekstimuodossa
+    // käytettiin ennen graafista tulostusta testaamiseen
     @Override
     public String toString(){
         
@@ -222,8 +225,8 @@ public class Map {
         this.istuvatIhmiset = istuvatIhmiset;
     }
     
-    private void generoiTuolit(int tuoliStrena) {
-        for (int i = 0; i < tuoliStrena; i++) {
+    private void generateChairs(int amount) {
+        for (int i = 0; i < amount; i++) {
             Tuoli e = new Tuoli(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
             tuolit.add(e);
         }

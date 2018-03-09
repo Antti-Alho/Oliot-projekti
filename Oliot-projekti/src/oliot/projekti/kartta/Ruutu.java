@@ -15,16 +15,7 @@ public class Ruutu {
     private Ruutu naapuriW;
     private Ruutu naapuriE;
     private int d;
-
-    public int getD() {
-        return d;
-    }
-
-    public void setD(int d) {
-        this.d = d;
-    }
     
-
     public Ruutu(int x, int y, boolean seinä) {
         this.x = x;
         this.y = y;
@@ -104,6 +95,14 @@ public class Ruutu {
         this.route = route;
     }
     
+    public int getD() {
+        return d;
+    }
+
+    public void setD(int d) {
+        this.d = d;
+    }
+    
     public ArrayList<Ruutu> getNaapuritMP(){
         ArrayList<Ruutu> a = new ArrayList<>();
         if(this.naapuriN.seinä == false)a.add(this.naapuriN);
@@ -112,7 +111,7 @@ public class Ruutu {
         if(this.naapuriW.seinä == false)a.add(this.naapuriW);
         return a;
     }
-    
+
     @Override
     public String toString(){
         if (seinä){
@@ -121,6 +120,4 @@ public class Ruutu {
             return "_";
         }
     }
-    
-    
 }
