@@ -33,11 +33,11 @@ public class Naytto extends JPanel implements ActionListener{
     
     
     public Naytto(Map kartta) {
-        this.ohjaaja = new LiikkuvienOhjaaja(kartta);
-        setPreferredSize(new Dimension(600,600));
-        setBackground(Color.BLUE);
         this.kartta = kartta;
         this.ruudut = kartta.getKoord();
+        this.ohjaaja = new LiikkuvienOhjaaja(kartta);
+        setPreferredSize(new Dimension(30*kartta.getMaxZize(),30*kartta.getMaxZize()));
+        setBackground(Color.BLUE);
         timer.start();// Start the timer here.
     }
     
@@ -126,7 +126,7 @@ public class Naytto extends JPanel implements ActionListener{
     }
     
     public void paintTuolit(Graphics g) {
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.MAGENTA);
         g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     
