@@ -16,8 +16,8 @@ public class Human {
     private int intell;
     private int cha;
     private int tavoite;
-    private Olut olut;
-    private Tuoli tuoli;
+    private Beer olut;
+    private Chair tuoli;
     private Pisuaari pisuaari;   
     private String nimi;
     private int x;
@@ -173,19 +173,19 @@ public class Human {
         this.cha = cha;   
     }
 
-    public Olut getOlut() {
+    public Beer getOlut() {
         return olut;
     }
 
-    public void setOlut(Olut olut) {
+    public void setOlut(Beer olut) {
         this.olut = olut;
     }
 
-    public Tuoli getTuoli() {
+    public Chair getTuoli() {
         return tuoli;
     }
 
-    public void setTuoli(Tuoli tuoli) {
+    public void setTuoli(Chair tuoli) {
         this.tuoli = tuoli;
     }
 

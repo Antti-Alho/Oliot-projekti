@@ -2,11 +2,11 @@ package oliot.liikkuvatOliot;
 
 import java.util.ArrayList;
 
-public class TappeluOhjaaja {
+public class fightController {
    ArrayList<Human> ihmiset;
    int x, y;
    
-    public TappeluOhjaaja(ArrayList<Human> ihmiset) {
+    public fightController(ArrayList<Human> ihmiset) {
         this.ihmiset=ihmiset;
         this.x=ihmiset.get(0).getX();
         this.y=ihmiset.get(0).getY();

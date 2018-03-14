@@ -2,79 +2,77 @@ package oliot.projekti.kartta;
 
 import java.util.ArrayList;
 import java.util.Random;
-import oliot.liikkuvatOliot.Baaritiski;
+import oliot.liikkuvatOliot.Bar;
 import oliot.liikkuvatOliot.Human;
-import oliot.liikkuvatOliot.Olut;
-import oliot.liikkuvatOliot.TappeluOhjaaja;
-import oliot.liikkuvatOliot.Tuoli;
+import oliot.liikkuvatOliot.Beer;
+import oliot.liikkuvatOliot.fightController;
+import oliot.liikkuvatOliot.Chair;
 import oliot.liikkuvatOliot.Pisuaari;
 
 public class Map {
 
     private int roomAmount;
     private IntRange roomSize;
-    private ArrayList<Ruutu[]> koordinaatisto;
-    private ArrayList<String> tulostettavat;
-    private ArrayList<Olut> esineet;
-    private ArrayList<Human> ihmiset;
+    private ArrayList<Tile[]> coordinates;
+    private ArrayList<Beer> beers;
+    private ArrayList<Human> humans;
     private ArrayList<Room> rooms;
-    private ArrayList<TappeluOhjaaja> tappelut;
-    private ArrayList<Baaritiski> baaritiskit;
-    private ArrayList<Tuoli> tuolit;
-    private ArrayList<Human> istuvatIhmiset;
+    private ArrayList<fightController> fights;
+    private ArrayList<Bar> bars;
+    private ArrayList<Chair> chairs;
+    private ArrayList<Human> sittingHumans;
     private ArrayList<Pisuaari> pisuaarit;
     private ArrayList<Human> kusevatIhmiset;
     private ArrayList<Human> poistettavatIhmiset;
-    
-    
-    private int maxZize;
+    private int maxZize; 
     Random r;
     
     // alustaa kaiken käyttövalmiiksi 
     public Map(
-            int huoneidenMaara,
-            int kokoMin,
-            int kokoMax,
-            int esineidenMaara,
-            int ihmistenMaara
+        int roomAmount,
+        int sizeMin,
+        int sizeMax,
+        int objectAmount,
+        int humanAmount
     ) {
         this.r = new Random();
-        this.maxZize = kokoMax;
-        this.ihmiset = new ArrayList<>();
-        this.esineet = new ArrayList<>();
-        this.baaritiskit = new ArrayList<>();
-        this.tuolit = new ArrayList<>();
+        this.maxZize = sizeMax;
+        this.humans = new ArrayList<>();
+        this.beers = new ArrayList<>();
+        this.bars = new ArrayList<>();
+        this.chairs = new ArrayList<>();
         this.pisuaarit = new ArrayList<>();
-        this.istuvatIhmiset = new ArrayList<>();
-        this.roomAmount = huoneidenMaara;
-        this.roomSize = new IntRange(kokoMin, kokoMax);
-        this.koordinaatisto = new ArrayList();
-        this.koordinaatisto = generoiKartta(kokoMax, kokoMax);
-        generoiBaaritiskit();
-        generoiIhmiset(ihmistenMaara);
-        yhdistaRuudut();
-        generoiOluet(esineidenMaara);
-        generatePisuaarit(4);
-        this.tappelut = new ArrayList();
+        this.sittingHumans = new ArrayList<>();
+        this.fights = new ArrayList();
+        this.roomAmount = roomAmount;
+        this.roomSize = new IntRange(sizeMin, sizeMax);
+        this.coordinates = new ArrayList();
+        this.coordinates = generateMap(sizeMax, sizeMax);
+        this.generateBar();
+        this.generateHumans(humanAmount);
+        this.combineTiles();
+        this.genrateBeer(objectAmount);
+        this.generatePisuaarit(4);
+        this.generateChairs();
     }
         
     //generoi huoneeseen ihmisiä
-    public void generoiIhmiset(int ihmisia){
-        for (int i = 0; i <=ihmisia; i++){
+    public void generateHumans(int humanamount){
+        for (int i = 0; i <=humanamount; i++){
             int x = r.nextInt(roomSize.max-2)+1;
             int y = r.nextInt(roomSize.max-2)+1;
             Human ihminen = new Human(x, y);
-            ihmiset.add(ihminen);
+            this.humans.add(ihminen);
             ihminen.ArvoStatit();
         }
     }
     
     // toistaiseksi täyttää huoneen kaljalla
     //tarkoitus laittaa kaljaa baaritiskille kun baaritiski on tyhjä kunhan baaritiski on olemassa
-    private void generoiOluet(int oluenMaara) {
+    private void genrateBeer(int oluenMaara) {
         for (int i = 0; i < oluenMaara; i++) {
-            Olut e = new Olut(10,r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
-            esineet.add(e);
+            Beer e = new Beer(10,r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
+            beers.add(e);
         }
     }
     
@@ -91,15 +89,15 @@ public class Map {
             a = roomSize.randomSize();
             b = roomSize.randomSize();
             Room room = new Room(a , b);
-            room.setKoordinaatisto(generoiKartta(a, b));
+            room.setKoordinaatisto(generateMap(a, b));
             rooms.add(room);
         }
         
     }
     
     //luo ruuduista verkon etäisyyden ja reitinhakua varten
-    public void yhdistaRuudut(){
-        ArrayList<Ruutu[]> rivit = this.koordinaatisto;
+    public void combineTiles(){
+        ArrayList<Tile[]> rivit = this.coordinates;
         for (int i = 1; i < rivit.size()-1; i++) {
             for (int j = 1; j < rivit.get(i).length-1; j++) {
                 rivit.get(i)[j].setNaapuriN(rivit.get(i-1)[j]);
@@ -109,33 +107,66 @@ public class Map {
             }
         }
     }
-    
-    public ArrayList<Ruutu[]> getKoord(){
-        return this.koordinaatisto;
-    }
 
     //ajetaan kerran luonnin yhteydessä asettelee seinät koordinaatistoon
-    public ArrayList<Ruutu[]> generoiKartta(int korkeus, int leveys){
+    public ArrayList<Tile[]> generateMap(int korkeus, int leveys){
         for (int i = 0; i < korkeus; i++) {
-            Ruutu[] ruudut = new Ruutu[leveys];
+            Tile[] ruudut = new Tile[leveys];
             for (int j = 0; j < ruudut.length; j++) {
                 if (i == 0 || i == korkeus-1){
-                    ruudut[j] = new Ruutu(i, j, true);
+                    ruudut[j] = new Tile(i, j, true);
                 } else {
                     if (j == 0){
-                        ruudut[j] = new Ruutu(i, j, true);
+                        ruudut[j] = new Tile(i, j, true);
                     } else if (j != 0 && j< ruudut.length-1){
-                        ruudut[j] = new Ruutu(i, j, false);
+                        ruudut[j] = new Tile(i, j, false);
                     } else {
-                        ruudut[j] = new Ruutu(i, j, true);
+                        ruudut[j] = new Tile(i, j, true);
                     }
                 }
             }
-            koordinaatisto.add(ruudut);
+            coordinates.add(ruudut);
         }
-        return this.koordinaatisto;
+        return this.coordinates;
+    }
+    
+    public void generatePisuaarit(int amount){
+        for (int i = 0; i < amount; i++) {
+            Pisuaari p = new Pisuaari((roomSize.max/2),1,0);
+            Pisuaari o = new Pisuaari((roomSize.max/2)+1, 1, 0);
+            pisuaarit.add(p);
+            pisuaarit.add(o);
+        }
+    }
+    
+    private void generateBar() {
+        for (int i = 1; i < coordinates.size()/4; i++) {
+            bars.add(new Bar(1,i));
+        }
+    }
+    
+    private void generateChairs() {
+        for (int i = 0; i < 10; i++) {
+            Chair chair = new Chair(r.nextInt(roomSize.max-2)+1,r.nextInt(roomSize.max-2)+1);
+            chairs.add(chair);
+        }
     }
 
+    public void fillTheBar() {
+        boolean barIsEmpty = true;
+        for (Bar bar : bars) {
+            for (Beer beer : beers) {
+                if (beer.getX() == bar.getX() && beer.getY() == bar.getY()) {
+                    barIsEmpty = false;
+                }
+            }
+            if (barIsEmpty) {
+                beers.add(new Beer(10 , bar.getX(), bar.getY()));
+                barIsEmpty = true;
+            }
+        }
+    }
+    
     //tulostaa koordinaatiston tekstimuodossa
     // käytettiin ennen graafista tulostusta testaamiseen
     @Override
@@ -143,8 +174,8 @@ public class Map {
         
         String a = "";
 
-        for (Ruutu[] ruutus : koordinaatisto) {
-            for (Ruutu ruutu : ruutus) {
+        for (Tile[] ruutus : coordinates) {
+            for (Tile ruutu : ruutus) {
                 a = a+ruutu.toString();
             }
             a = a + System.lineSeparator();
@@ -152,7 +183,9 @@ public class Map {
         return a;
     }
     
-    // getterit ja setterit
+    public ArrayList<Tile[]> getCoordinates(){
+        return this.coordinates;
+    }
     
     public int getHuoneidenMaara() {
         return roomAmount;
@@ -170,29 +203,30 @@ public class Map {
         this.roomSize = huoneidenKoko;
     }
 
-    public ArrayList<Olut> getOluet() {
-        return esineet;
+    public ArrayList<Beer> getBeers() {
+        return beers;
     }
 
-    public void setEsineet(ArrayList<Olut> esineet) {
-        this.esineet = esineet;
+    public void setEsineet(ArrayList<Beer> esineet) {
+        this.beers = esineet;
     }
 
-    public ArrayList<Human> getIhmiset() {
-        return ihmiset;
+    public ArrayList<Human> getHumans() {
+        return humans;
     }
 
     public void setIhmiset(ArrayList<Human> ihmiset) {
-        this.ihmiset = ihmiset;
+        this.humans = ihmiset;
     }
     
-    public ArrayList<TappeluOhjaaja> getTappelut() {
-        return tappelut;
+    public ArrayList<fightController> getTappelut() {
+        return fights;
     }
 
-    public void setTappelut(ArrayList<TappeluOhjaaja> tappelut) {
-        this.tappelut = tappelut;
+    public void setTappelut(ArrayList<fightController> tappelut) {
+        this.fights = tappelut;
     }
+    
     public int getMaxZize() {
         return maxZize;
     }
@@ -201,43 +235,30 @@ public class Map {
         this.maxZize = maxZize;
     }
 
-    public ArrayList<Baaritiski> getBaaritiskit() {
-        return baaritiskit;
+    public ArrayList<Bar> getBaaritiskit() {
+        return bars;
     }
 
-    public void setBaaritiskit(ArrayList<Baaritiski> baaritiskit) {
-        this.baaritiskit = baaritiskit;
+    public void setBaaritiskit(ArrayList<Bar> baaritiskit) {
+        this.bars = baaritiskit;
+    }
+    
+    public ArrayList<Chair> getTuolit() {
+        return chairs;
     }
 
-    private void generoiBaaritiskit() {
-        for (int i = 1; i < koordinaatisto.size()-1; i++) {
-            baaritiskit.add(new Baaritiski(1,i));
-        }
-    }
-
-    public ArrayList<Tuoli> getTuolit() {
-        return tuolit;
-    }
-
-    public void setTuolit(ArrayList<Tuoli> tuolit) {
-        this.tuolit = tuolit;
+    public void setTuolit(ArrayList<Chair> tuolit) {
+        this.chairs = tuolit;
     }
 
     public ArrayList<Human> getIstuvatIhmiset() {
-        return istuvatIhmiset;
+        return sittingHumans;
     }
 
     public void setIstuvatIhmiset(ArrayList<Human> istuvatIhmiset) {
-        this.istuvatIhmiset = istuvatIhmiset;
+        this.sittingHumans = istuvatIhmiset;
     }
     
-    private void generoiTuolit(int a) {
-        for (int i = 0; i < a; i++) {
-            Tuoli e = new Tuoli(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
-            tuolit.add(e);
-        }
-    }
-
     public ArrayList<Pisuaari> getPisuaarit() {
         return pisuaarit;
     }
@@ -245,15 +266,7 @@ public class Map {
     public void setPisuaarit(ArrayList<Pisuaari> pisuaarit) {
         this.pisuaarit = pisuaarit;
     }
-    public void generatePisuaarit(int amount){
-        for (int i = 0; i < amount; i++) {
-            Pisuaari p = new Pisuaari((roomSize.max/2),1,0);
-            Pisuaari o = new Pisuaari((roomSize.max/2)+1, 1, 0);
-            pisuaarit.add(p);
-            pisuaarit.add(o);
-        }
-    }
-
+    
     public ArrayList<Human> getKusevatIhmiset() {
         return kusevatIhmiset;
     }
@@ -269,5 +282,6 @@ public class Map {
     public void setPoistettavatIhmiset(ArrayList<Human> poistettavatIhmiset) {
         this.poistettavatIhmiset = poistettavatIhmiset;
     }
+
     
 }   

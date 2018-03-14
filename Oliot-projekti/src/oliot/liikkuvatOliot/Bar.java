@@ -1,11 +1,11 @@
 
 package oliot.liikkuvatOliot;
 
-public class Baaritiski{
+public class Bar{
     private int x;
     private int y;
 
-    public Baaritiski(int x, int y) {
+    public Bar(int x, int y) {
         this.x = x;
         this.y = y;
     }

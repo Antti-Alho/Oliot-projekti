@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Room {
     private int height;
     private int width;
-    private ArrayList<Ruutu[]> koordinaatisto;
+    private ArrayList<Tile[]> koordinaatisto;
     private Room naapuriN;
     private Room naapuriS;
     private Room naapuriW;
@@ -33,11 +33,11 @@ public class Room {
         this.naapuriN = naapuri;
     }
 
-    public ArrayList<Ruutu[]> getKoordinaatisto() {
+    public ArrayList<Tile[]> getKoordinaatisto() {
         return koordinaatisto;
     }
 
-    public void setKoordinaatisto(ArrayList<Ruutu[]> koordinaatisto) {
+    public void setKoordinaatisto(ArrayList<Tile[]> koordinaatisto) {
         this.koordinaatisto = koordinaatisto;
         this.height = koordinaatisto.size();
         this.width = koordinaatisto.get(0).length;

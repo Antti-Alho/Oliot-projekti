@@ -9,19 +9,17 @@ package oliot.liikkuvatOliot;
  *
  * @author Petteri
  */
-public class Olut{
-    int maara;
-    int x;
-    int y;
+public class Beer{
+    private int maara;
+    private int x;
+    private int y;
+    private boolean empty;
 
-    public int getMaara() {
-        return maara;
-    }
-
-    public Olut(int maara, int x, int y) {
+    public Beer(int maara, int x, int y) {
         this.x = x;
         this.y = y;
         this.maara = maara;
+        this.empty = false;
     }
 
     public int getX() {
@@ -43,9 +41,21 @@ public class Olut{
     public void setMaara(int maara) {
         this.maara = maara;
     }
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
+    }
     
     public void Juo(){
         this.maara = maara - 1;
+    }
+    
+    public int getMaara() {
+        return maara;
     }
         
 }

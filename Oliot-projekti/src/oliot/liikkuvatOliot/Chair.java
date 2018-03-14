@@ -9,13 +9,13 @@ import java.util.Random;
  *
  * @author Petteri
  */
-public class Tuoli{
+public class Chair{
     int x;
     int y;
     int tuoliStr;
     Random rand = new Random();
     
-    public Tuoli(int x, int y) {
+    public Chair(int x, int y) {
         this.x = x;
         this.y = y;
         tuoliStr = rand.nextInt(10)+1;

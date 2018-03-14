@@ -3,20 +3,20 @@ package oliot.projekti.kartta;
 import java.util.ArrayList;
 import oliot.liikkuvatOliot.Human;
 
-public class Ruutu {
+public class Tile {
     private int x;
     private int y;
     private boolean seinä;
     private Human ihminen;
     
-    private Ruutu route;
-    private Ruutu naapuriN;
-    private Ruutu naapuriS;
-    private Ruutu naapuriW;
-    private Ruutu naapuriE;
+    private Tile route;
+    private Tile naapuriN;
+    private Tile naapuriS;
+    private Tile naapuriW;
+    private Tile naapuriE;
     private int d;
     
-    public Ruutu(int x, int y, boolean seinä) {
+    public Tile(int x, int y, boolean seinä) {
         this.x = x;
         this.y = y;
         this.seinä = seinä;
@@ -55,43 +55,43 @@ public class Ruutu {
         this.ihminen = ihminen;
     }
     
-    public Ruutu getNaapuriN() {
+    public Tile getNaapuriN() {
         return naapuriN;
     }
 
-    public void setNaapuriN(Ruutu naapuriN) {
+    public void setNaapuriN(Tile naapuriN) {
         this.naapuriN = naapuriN;
     }
 
-    public Ruutu getNaapuriS() {
+    public Tile getNaapuriS() {
         return naapuriS;
     }
 
-    public void setNaapuriS(Ruutu naapuriS) {
+    public void setNaapuriS(Tile naapuriS) {
         this.naapuriS = naapuriS;
     }
 
-    public Ruutu getNaapuriW() {
+    public Tile getNaapuriW() {
         return naapuriW;
     }
 
-    public void setNaapuriW(Ruutu naapuriW) {
+    public void setNaapuriW(Tile naapuriW) {
         this.naapuriW = naapuriW;
     }
 
-    public Ruutu getNaapuriE() {
+    public Tile getNaapuriE() {
         return naapuriE;
     }
 
-    public void setNaapuriE(Ruutu naapuriE) {
+    public void setNaapuriE(Tile naapuriE) {
         this.naapuriE = naapuriE;
     }
    
-    public Ruutu getRoute() {
+    public Tile getRoute() {
         return route;
     }
 
-    public void setRoute(Ruutu route) {
+    public void setRoute(Tile route) {
         this.route = route;
     }
     
@@ -103,8 +103,8 @@ public class Ruutu {
         this.d = d;
     }
     
-    public ArrayList<Ruutu> getNaapuritMP(){
-        ArrayList<Ruutu> a = new ArrayList<>();
+    public ArrayList<Tile> getNaapuritMP(){
+        ArrayList<Tile> a = new ArrayList<>();
         if(this.naapuriN.seinä == false)a.add(this.naapuriN);
         if(this.naapuriE.seinä == false)a.add(this.naapuriE);
         if(this.naapuriS.seinä == false)a.add(this.naapuriS);

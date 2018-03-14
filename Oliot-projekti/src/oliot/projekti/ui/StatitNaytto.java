@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import oliot.liikkuvatOliot.Human;
-import oliot.liikkuvatOliot.TappeluOhjaaja;
+import oliot.liikkuvatOliot.fightController;
 import oliot.projekti.kartta.Map;
 
 /**
@@ -38,7 +38,7 @@ public class StatitNaytto extends JPanel implements ActionListener{
         this.kartta = kartta;
         setPreferredSize(new Dimension(200, 500));
         setBackground(Color.WHITE);
-        this.ihmiset = kartta.getIhmiset();
+        this.ihmiset = kartta.getHumans();
         this.statit = new JLabel("Ihmisten Statit");
         
     }
@@ -66,7 +66,7 @@ public class StatitNaytto extends JPanel implements ActionListener{
         tulos = tulos + "<br> Tappelut: <br>";
         
         int tappelulaskuri = 0;
-        for (TappeluOhjaaja tappelu : kartta.getTappelut()) {
+        for (fightController tappelu : kartta.getTappelut()) {
             tappelulaskuri++;
             tulos = tulos + "<br>" + "Tappelu:" + tappelulaskuri;
             for (int i = 0; i < tappelu.getIhmiset().size(); i++) {
