@@ -40,6 +40,8 @@ public class LiikkuvienOhjaaja {
             }
             //istu(human);
             //nouse(human);
+            //timeToPee(human);
+            //allOutOfPee(human);
             for (int j = 0; j < ihmiset.size(); j++) {
                 if (j!=i){
                     if(ihmiset.get(i).getX() == ihmiset.get(j).getX()){
@@ -329,5 +331,38 @@ public class LiikkuvienOhjaaja {
             }
         
     }
-
+    //tällä komennolla ihmiset menevät pisuaarille
+    public void timeToPee(Human human){
+        ArrayList<Pisuaari> pisuaarit = map.getPisuaarit();
+        ArrayList<Human> peeingPeople = map.getKusevatIhmiset();
+        ArrayList<Human> ihmiset = map.getIhmiset();
+        ArrayList<Human> poistettavat = map.getPoistettavatIhmiset();
+        for(Pisuaari pisuaari:pisuaarit){
+            if(human.getX() == pisuaari.getX() && human.getY() == pisuaari.getY()
+                    && human.getTavoite() == 3){
+                ihmiset.remove(human);
+                peeingPeople.add(human);
+            }
+        }
+    }
+    //tällä komennolla ihmiset käyttävät pisuaaria ja lähtevät pois pisuaarilta,
+    //humalatila laskee myös puoleen aiemmasta.
+    public void allOutOfPee(Human human){
+        ArrayList<Human> peeingPeople = map.getKusevatIhmiset();
+        ArrayList<Human> ihmiset = map.getIhmiset();
+        for(Human ihminen:ihmiset){
+        if(human.getHumala()>1){
+        human.setHumala(human.getHumala()/2);
+        peeingPeople.remove(human);
+        ihmiset.add(human);
+        }
+        else{
+            peeingPeople.remove(human);
+        ihmiset.add(human);
+        }
+        } 
+        
+    }
 }
+
+

@@ -7,6 +7,7 @@ import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
 import oliot.liikkuvatOliot.TappeluOhjaaja;
 import oliot.liikkuvatOliot.Tuoli;
+import oliot.liikkuvatOliot.Pisuaari;
 
 public class Map {
 
@@ -21,6 +22,10 @@ public class Map {
     private ArrayList<Baaritiski> baaritiskit;
     private ArrayList<Tuoli> tuolit;
     private ArrayList<Human> istuvatIhmiset;
+    private ArrayList<Pisuaari> pisuaarit;
+    private ArrayList<Human> kusevatIhmiset;
+    private ArrayList<Human> poistettavatIhmiset;
+    
     
     private int maxZize;
     Random r;
@@ -39,6 +44,7 @@ public class Map {
         this.esineet = new ArrayList<>();
         this.baaritiskit = new ArrayList<>();
         this.tuolit = new ArrayList<>();
+        this.pisuaarit = new ArrayList<>();
         this.istuvatIhmiset = new ArrayList<>();
         this.roomAmount = huoneidenMaara;
         this.roomSize = new IntRange(kokoMin, kokoMax);
@@ -49,6 +55,7 @@ public class Map {
         generoiIhmiset(ihmistenMaara);
         yhdistaRuudut();
         generoiOluet(esineidenMaara);
+        generatePisuaarit(4);
         this.tappelut = new ArrayList();
     }
         
@@ -231,4 +238,37 @@ public class Map {
             tuolit.add(e);
         }
     }
+
+    public ArrayList<Pisuaari> getPisuaarit() {
+        return pisuaarit;
+    }
+
+    public void setPisuaarit(ArrayList<Pisuaari> pisuaarit) {
+        this.pisuaarit = pisuaarit;
+    }
+    public void generatePisuaarit(int amount){
+        for (int i = 0; i < amount; i++) {
+            Pisuaari p = new Pisuaari((roomSize.max/2),1,0);
+            Pisuaari o = new Pisuaari((roomSize.max/2)+1, 1, 0);
+            pisuaarit.add(p);
+            pisuaarit.add(o);
+        }
+    }
+
+    public ArrayList<Human> getKusevatIhmiset() {
+        return kusevatIhmiset;
+    }
+
+    public void setKusevatIhmiset(ArrayList<Human> kusevatIhmiset) {
+        this.kusevatIhmiset = kusevatIhmiset;
+    }
+
+    public ArrayList<Human> getPoistettavatIhmiset() {
+        return poistettavatIhmiset;
+    }
+
+    public void setPoistettavatIhmiset(ArrayList<Human> poistettavatIhmiset) {
+        this.poistettavatIhmiset = poistettavatIhmiset;
+    }
+    
 }   

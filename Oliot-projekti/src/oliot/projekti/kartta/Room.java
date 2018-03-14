@@ -7,11 +7,10 @@ public class Room {
     private int height;
     private int width;
     private ArrayList<Ruutu[]> koordinaatisto;
-
-    public Room(int height, int wedth, Corridor corridor) {
-        this.height = height;
-        this.width = wedth;
-    }
+    private Room naapuriN;
+    private Room naapuriS;
+    private Room naapuriW;
+    private Room naapuriE;
 
     public Room(int height, int wedth) {
         this.height = height;
@@ -24,6 +23,14 @@ public class Room {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public Room getNaapuriN() {
+        return naapuriN;
+    }
+
+    public void setNaapuriN(Room naapuri) {
+        this.naapuriN = naapuri;
     }
 
     public ArrayList<Ruutu[]> getKoordinaatisto() {

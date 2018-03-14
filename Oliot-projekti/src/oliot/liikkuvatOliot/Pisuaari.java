@@ -16,5 +16,29 @@ public class Pisuaari {
         this.y = y;
         this.kusenMaara = kusenMaara;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getKusenMaara() {
+        return kusenMaara;
+    }
+
+    public void setKusenMaara(int kusenMaara) {
+        this.kusenMaara = kusenMaara;
+    }
     
 }
