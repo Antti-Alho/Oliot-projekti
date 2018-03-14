@@ -322,14 +322,12 @@ public class LiikkuvienOhjaaja {
     public void nouse(Human human){
         ArrayList<Human> istuvatIhmiset = map.getIstuvatIhmiset();
         ArrayList<Human> ihmiset = map.getIhmiset();
-                    if (human.getOlut().getMaara() > 0){
-                human.getOlut().setMaara(human.getOlut().getMaara() - 1);
-            }
-            else {
-                istuvatIhmiset.remove(human);
-                ihmiset.add(human);
-            }
-        
+        if (human.getOlut().getMaara() > 0){
+            human.getOlut().setMaara(human.getOlut().getMaara() - 1);
+        } else {
+            istuvatIhmiset.remove(human);
+            ihmiset.add(human);
+        }
     }
     //tällä komennolla ihmiset menevät pisuaarille
     public void timeToPee(Human human){
@@ -338,8 +336,7 @@ public class LiikkuvienOhjaaja {
         ArrayList<Human> ihmiset = map.getIhmiset();
         ArrayList<Human> poistettavat = map.getPoistettavatIhmiset();
         for(Pisuaari pisuaari:pisuaarit){
-            if(human.getX() == pisuaari.getX() && human.getY() == pisuaari.getY()
-                    && human.getTavoite() == 3){
+            if(human.getX() == pisuaari.getX()&& human.getY() == pisuaari.getY()&& human.getTavoite() == 3){
                 ihmiset.remove(human);
                 peeingPeople.add(human);
             }
@@ -351,17 +348,15 @@ public class LiikkuvienOhjaaja {
         ArrayList<Human> peeingPeople = map.getKusevatIhmiset();
         ArrayList<Human> ihmiset = map.getIhmiset();
         for(Human ihminen:ihmiset){
-        if(human.getHumala()>1){
-        human.setHumala(human.getHumala()/2);
-        peeingPeople.remove(human);
-        ihmiset.add(human);
+            if(human.getHumala()>1){
+                human.setHumala(human.getHumala()/2);
+                peeingPeople.remove(human);
+                ihmiset.add(human);
+            } else {
+                peeingPeople.remove(human);
+                ihmiset.add(human);
+            }
         }
-        else{
-            peeingPeople.remove(human);
-        ihmiset.add(human);
-        }
-        } 
-        
     }
 }
 
