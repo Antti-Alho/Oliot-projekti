@@ -33,22 +33,24 @@ public class Display extends JFrame {
     
     public Display() {
            
-        MenuNaytto naytto1 = new MenuNaytto();
-        JButton aloita = new JButton("Aloita");
-        painikepaneeli = new JPanel();
-        kokopaneeli = new JPanel();
-        kokolabel = new JLabel("Anna koko");
+        this.naytto1 = new MenuNaytto();
+        this.aloita = new JButton("Aloita");
+        this.painikepaneeli = new JPanel();
+        this.kokopaneeli = new JPanel();
+        this.kokolabel = new JLabel("Anna koko");
         
         
-        tekstivaara = new JLabel("");
+        
+        this.tekstivaara = new JLabel("");
         tekstivaara.setForeground(Color.RED);
         
         //vaihtoehto jos textfield ei toimi
         numerot = new JSpinner();
         
-        //textfield kerrotaan että hyväksyy vain numeroita
+        //textfield kerrotaan että hyväksyy vain numeroita 
+        //jos laittaa kirjamia ja painaa aloita tyhjentyy tekstikenttä
         NumberFormat summamuoto = NumberFormat.getNumberInstance();
-        tekstikenttä = new JFormattedTextField(summamuoto);;
+        this.tekstikenttä = new JFormattedTextField(summamuoto);;
         tekstikenttä.setColumns(10);
         
         //luo punaisella tekstillä huomion että kirjoita numeroita
@@ -79,51 +81,33 @@ public class Display extends JFrame {
         add(naytto1, BorderLayout.CENTER);
         naytto1.add(painikepaneeli, BorderLayout.SOUTH);
         naytto1.add(kokopaneeli, BorderLayout.NORTH);
-        
+        naytto1.getRootPane().setDefaultButton(aloita); 
         
         pack();
         setLocationRelativeTo(null);
         setVisible(true);    
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        naytto1.getRootPane().setDefaultButton(aloita);
         
         
-       
         //nappi josta ohjelma alkaa
         aloita.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                //jos tekstikenttä on tyhjä annetaan kartalle 20 perus kooksi
-                if( tekstikenttä.getText().isEmpty()) {
-                    int koko= 20;
-                    naytto1.setVisible(false);
-                    Map kartta = new Map(koko, koko, koko, koko, koko);
-                    Naytto naytto = new Naytto(kartta);
-                    add(naytto, BorderLayout.CENTER);
-                    pack();
-                    naytto.setVisible(true);
-                    setDefaultCloseOperation(EXIT_ON_CLOSE);
-                
-                    StatitNaytto statitNaytto = new StatitNaytto(kartta);
-                    add(statitNaytto, BorderLayout.EAST);
-                    pack();
-                    statitNaytto.setVisible(true);
-                    setDefaultCloseOperation(EXIT_ON_CLOSE);
-                } 
-                //muuten menee tekstfieldin value 
-                else {
-                    
                 int TextFieldValue = Integer.parseInt(tekstikenttä.getText());
-                naytto1.setVisible(false);
+              
+                naytto1.setVisible(false); // sulkee aloitusnäytön
                 
+                //avaa ohjelman näytön ja statit näytön
                 Map kartta = new Map(TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue, TextFieldValue);
                 Naytto naytto = new Naytto(kartta);
                 add(naytto, BorderLayout.CENTER);
                 pack();
                 naytto.setVisible(true);
-                setDefaultCloseOperation(EXIT_ON_CLOSE);
                 
+                naytto.getRootPane().setDefaultButton(null); //enter ei toimi ohjelmanäytössä enää
+                
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
                 StatitNaytto statitNaytto = new StatitNaytto(kartta);
                 add(statitNaytto, BorderLayout.EAST);
                 pack();
@@ -131,33 +115,11 @@ public class Display extends JFrame {
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
                 
                 
-                }}
+                }
         });
-        
+         
      
     }
-    class JButtonStateController implements DocumentListener {
-    private JButton button;
-
-    JButtonStateController(JButton b) {
-        this.button = b;
-    }
-
-    public void changedUpdate(DocumentEvent e) {
-        disableIfEmpty(e);
-    }
-
-    public void insertUpdate(DocumentEvent e){
-        disableIfEmpty(e);
-    }
-
-    public void removeUpdate(DocumentEvent e){
-        disableIfEmpty(e);
-    }
-
-    public void disableIfEmpty(DocumentEvent e) {
-        button.setEnabled(e.getDocument().getLength() > 0);
-    }
-}
+    
     
 }

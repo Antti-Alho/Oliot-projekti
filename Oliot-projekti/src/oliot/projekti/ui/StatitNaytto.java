@@ -25,7 +25,7 @@ public class StatitNaytto extends JPanel implements ActionListener{
     Map kartta;
     private ArrayList<Human> ihmiset;
     private JLabel statit;
-    Timer timer = new Timer(500, this);
+    Timer timer = new Timer(800, this);
     private double numerot; 
     private ArrayList<JLabel> ihmistenstatit;
     
@@ -38,8 +38,8 @@ public class StatitNaytto extends JPanel implements ActionListener{
         this.kartta = kartta;
         setPreferredSize(new Dimension(200, 500));
         setBackground(Color.WHITE);
-        ihmiset = kartta.getIhmiset();
-        statit = new JLabel("Ihmisten Statit");
+        this.ihmiset = kartta.getIhmiset();
+        this.statit = new JLabel("Ihmisten Statit");
         
     }
     

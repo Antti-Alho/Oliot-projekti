@@ -28,7 +28,7 @@ public class Naytto extends JPanel implements ActionListener{
     
     private int xpixelit = 50;
     private int ypixelit = 50;
-    Timer timer=new Timer(500, this);
+    Timer timer=new Timer(800, this);
     LiikkuvienOhjaaja ohjaaja;
     int frameLaskuri = 0;
     
@@ -37,9 +37,9 @@ public class Naytto extends JPanel implements ActionListener{
         this.kartta = kartta;
         this.ruudut = kartta.getKoord();
         this.ohjaaja = new LiikkuvienOhjaaja(kartta);
-        setPreferredSize(new Dimension(30*kartta.getMaxZize(),30*kartta.getMaxZize()));
-        setBackground(Color.BLUE);
-        timer.start();// Start the timer here.
+        this.setPreferredSize(new Dimension(30*kartta.getMaxZize(),30*kartta.getMaxZize()));
+        this.setBackground(Color.BLUE);
+        timer.start();// .
     }
     
     public void paintComponent(Graphics g) {
@@ -149,7 +149,7 @@ public class Naytto extends JPanel implements ActionListener{
             System.out.println("ihmisiä on " + kartta.getIhmiset().size());
             ArrayList<Human> Liikuta = ohjaaja.Liikuta();
             kartta.setIhmiset(Liikuta);
-            repaint();// this will call at every 1 second
+            repaint();//
         }
     }
 }

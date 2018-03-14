@@ -20,17 +20,18 @@ public class MenuNaytto extends JPanel {
     private ImageIcon image;
     private JLabel background;
     
+    //luodaan tässä classissa aloitusnäyttö jossa on kuva
     public MenuNaytto() {
-        setPreferredSize(new Dimension(500,500));
+        this.setPreferredSize(new Dimension(500,500));
         
-        //backroungimage
-        setLayout(new BorderLayout());
-        image = new ImageIcon(getClass().getResource("BarFight.jpg"));
-        background = new JLabel (image);
+        //aloitusnäytön taustakuva
+        this.setLayout(new BorderLayout());
+        this.image = new ImageIcon(getClass().getResource("BarFight.jpg"));
+        this.background = new JLabel (image);
         
         
-        add(background);
-        background.setLayout(new FlowLayout());
+        this.add(background);
+        this.background.setLayout(new FlowLayout());
     }
     
 }
