@@ -28,6 +28,7 @@ public class MenuNaytto extends JPanel {
         image = new ImageIcon(getClass().getResource("BarFight.jpg"));
         background = new JLabel (image);
         
+        
         add(background);
         background.setLayout(new FlowLayout());
     }
