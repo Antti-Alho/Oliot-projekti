@@ -3,17 +3,18 @@ package oliot.projekti.kartta;
 import java.util.ArrayList;
 import java.util.Random;
 import oliot.liikkuvatOliot.Baaritiski;
-import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 import oliot.liikkuvatOliot.Olut;
 import oliot.liikkuvatOliot.TappeluOhjaaja;
 import oliot.liikkuvatOliot.Tuoli;
+import oliot.liikkuvatOliot.Pisuaari;
 
 public class Map {
 
     private int roomAmount;
     private IntRange roomSize;
     private ArrayList<Ruutu[]> koordinaatisto;
+    private ArrayList<String> tulostettavat;
     private ArrayList<Olut> esineet;
     private ArrayList<Human> ihmiset;
     private ArrayList<Room> rooms;
@@ -21,6 +22,10 @@ public class Map {
     private ArrayList<Baaritiski> baaritiskit;
     private ArrayList<Tuoli> tuolit;
     private ArrayList<Human> istuvatIhmiset;
+    private ArrayList<Pisuaari> pisuaarit;
+    private ArrayList<Human> kusevatIhmiset;
+    private ArrayList<Human> poistettavatIhmiset;
+    
     
     private int maxZize;
     Random r;
@@ -38,6 +43,9 @@ public class Map {
         this.ihmiset = new ArrayList<>();
         this.esineet = new ArrayList<>();
         this.baaritiskit = new ArrayList<>();
+        this.tuolit = new ArrayList<>();
+        this.pisuaarit = new ArrayList<>();
+        this.istuvatIhmiset = new ArrayList<>();
         this.roomAmount = huoneidenMaara;
         this.roomSize = new IntRange(kokoMin, kokoMax);
         this.koordinaatisto = new ArrayList();
@@ -46,6 +54,7 @@ public class Map {
         generoiIhmiset(ihmistenMaara);
         yhdistaRuudut();
         generoiOluet(esineidenMaara);
+        generatePisuaarit(4);
         this.tappelut = new ArrayList();
     }
         
@@ -55,11 +64,6 @@ public class Map {
             int x = r.nextInt(roomSize.max-2)+1;
             int y = r.nextInt(roomSize.max-2)+1;
             Human ihminen = new Human(x, y);
-            /*for (Human ihminen1 : ihmiset) {
-                if (ihminen.getX() == ihminen1.getX() && ihminen.getY() == ihminen1.getY()){
-                    ihminen.setX(ihminen.getX() + 1);
-                }
-            }*/
             ihmiset.add(ihminen);
             ihminen.ArvoStatit();
         }
@@ -133,6 +137,7 @@ public class Map {
     }
 
     //tulostaa koordinaatiston tekstimuodossa
+    // käytettiin ennen graafista tulostusta testaamiseen
     @Override
     public String toString(){
         
@@ -208,7 +213,6 @@ public class Map {
         for (int i = 1; i < koordinaatisto.size()-1; i++) {
             baaritiskit.add(new Baaritiski(1,i));
         }
- 
     }
 
     public ArrayList<Tuoli> getTuolit() {
@@ -233,4 +237,37 @@ public class Map {
             tuolit.add(e);
         }
     }
+
+    public ArrayList<Pisuaari> getPisuaarit() {
+        return pisuaarit;
+    }
+
+    public void setPisuaarit(ArrayList<Pisuaari> pisuaarit) {
+        this.pisuaarit = pisuaarit;
+    }
+    public void generatePisuaarit(int amount){
+        for (int i = 0; i < amount; i++) {
+            Pisuaari p = new Pisuaari((roomSize.max/2),1,0);
+            Pisuaari o = new Pisuaari((roomSize.max/2)+1, 1, 0);
+            pisuaarit.add(p);
+            pisuaarit.add(o);
+        }
+    }
+
+    public ArrayList<Human> getKusevatIhmiset() {
+        return kusevatIhmiset;
+    }
+
+    public void setKusevatIhmiset(ArrayList<Human> kusevatIhmiset) {
+        this.kusevatIhmiset = kusevatIhmiset;
+    }
+
+    public ArrayList<Human> getPoistettavatIhmiset() {
+        return poistettavatIhmiset;
+    }
+
+    public void setPoistettavatIhmiset(ArrayList<Human> poistettavatIhmiset) {
+        this.poistettavatIhmiset = poistettavatIhmiset;
+    }
+    
 }   

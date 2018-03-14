@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import oliot.liikkuvatOliot.Human;
+import oliot.liikkuvatOliot.Pisuaari;
 import oliot.liikkuvatOliot.LiikkuvienOhjaaja;
 import oliot.projekti.kartta.Map;
 import oliot.projekti.kartta.Ruutu;
@@ -33,11 +34,11 @@ public class Naytto extends JPanel implements ActionListener{
     
     
     public Naytto(Map kartta) {
-        this.ohjaaja = new LiikkuvienOhjaaja(kartta);
-        setPreferredSize(new Dimension(600,600));
-        setBackground(Color.BLUE);
         this.kartta = kartta;
         this.ruudut = kartta.getKoord();
+        this.ohjaaja = new LiikkuvienOhjaaja(kartta);
+        setPreferredSize(new Dimension(30*kartta.getMaxZize(),30*kartta.getMaxZize()));
+        setBackground(Color.BLUE);
         timer.start();// Start the timer here.
     }
     
@@ -86,6 +87,13 @@ public class Naytto extends JPanel implements ActionListener{
                         paintTuolit(g);
                     }
                 }
+                //Pisuaarien tulostus
+                for(int a = 0; a < kartta.getPisuaarit().size(); a++){
+                    if(kartta.getPisuaarit().get(a).getX() == i &&
+                            kartta.getPisuaarit().get(a).getY() == j){
+                        paintPisuaari(g);
+                    }
+                }
                 
                 xpixelit = xpixelit+25;
             }
@@ -126,7 +134,11 @@ public class Naytto extends JPanel implements ActionListener{
     }
     
     public void paintTuolit(Graphics g) {
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.MAGENTA);
+        g.fillRect(xpixelit, ypixelit, 25, 25);
+    }
+    public void paintPisuaari(Graphics g){
+        g.setColor(Color.WHITE);
         g.fillRect(xpixelit, ypixelit, 25, 25);
     }
     

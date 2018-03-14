@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package oliot.liikkuvatOliot;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author melto
- */
 public class TappeluOhjaaja {
    ArrayList<Human> ihmiset;
    int x, y;
@@ -20,8 +11,6 @@ public class TappeluOhjaaja {
         this.x=ihmiset.get(0).getX();
         this.y=ihmiset.get(0).getY();
     }
-
-
     
     public void ihmistenLyönti() {
         int a = 0; 
@@ -40,7 +29,8 @@ public class TappeluOhjaaja {
             ihmiset.removeAll(kuolleet);
         }
     }
-    public Human getHuman() {
+    
+    public Human getWinner() {
         return ihmiset.get(0);
     }
 

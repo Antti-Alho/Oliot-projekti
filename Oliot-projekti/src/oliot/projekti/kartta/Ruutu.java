@@ -1,7 +1,6 @@
 package oliot.projekti.kartta;
 
 import java.util.ArrayList;
-import oliot.liikkuvatOliot.Esine;
 import oliot.liikkuvatOliot.Human;
 
 public class Ruutu {
@@ -9,7 +8,6 @@ public class Ruutu {
     private int y;
     private boolean seinä;
     private Human ihminen;
-    private Esine esine;
     
     private Ruutu route;
     private Ruutu naapuriN;
@@ -17,16 +15,7 @@ public class Ruutu {
     private Ruutu naapuriW;
     private Ruutu naapuriE;
     private int d;
-
-    public int getD() {
-        return d;
-    }
-
-    public void setD(int d) {
-        this.d = d;
-    }
     
-
     public Ruutu(int x, int y, boolean seinä) {
         this.x = x;
         this.y = y;
@@ -65,15 +54,7 @@ public class Ruutu {
     public void setIhminen(Human ihminen) {
         this.ihminen = ihminen;
     }
-
-    public Esine getEsine() {
-        return esine;
-    }
-
-    public void setEsine(Esine esine) {
-        this.esine = esine;
-    }
-
+    
     public Ruutu getNaapuriN() {
         return naapuriN;
     }
@@ -114,6 +95,14 @@ public class Ruutu {
         this.route = route;
     }
     
+    public int getD() {
+        return d;
+    }
+
+    public void setD(int d) {
+        this.d = d;
+    }
+    
     public ArrayList<Ruutu> getNaapuritMP(){
         ArrayList<Ruutu> a = new ArrayList<>();
         if(this.naapuriN.seinä == false)a.add(this.naapuriN);
@@ -122,7 +111,7 @@ public class Ruutu {
         if(this.naapuriW.seinä == false)a.add(this.naapuriW);
         return a;
     }
-    
+
     @Override
     public String toString(){
         if (seinä){
@@ -131,6 +120,4 @@ public class Ruutu {
             return "_";
         }
     }
-    
-    
 }
