@@ -226,8 +226,9 @@ public class Map {
     public void setIstuvatIhmiset(ArrayList<Human> istuvatIhmiset) {
         this.istuvatIhmiset = istuvatIhmiset;
     }
-        private void generoiTuolit(int tuoliStrena) {
-        for (int i = 0; i < tuoliStrena; i++) {
+    
+    private void generoiTuolit(int a) {
+        for (int i = 0; i < a; i++) {
             Tuoli e = new Tuoli(r.nextInt(roomSize.max-2)+1, r.nextInt(roomSize.max-2)+1);
             tuolit.add(e);
         }
