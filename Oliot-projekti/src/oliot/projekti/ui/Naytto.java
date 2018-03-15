@@ -52,6 +52,13 @@ public class Naytto extends JPanel implements ActionListener{
                 if(rivi[j].isSeinä()){
                     paintHuone(g);
                 }
+                //Baaritiskin tulostus
+                for (int a = 0; a < kartta.getBaaritiskit().size(); a++) {
+                    if (kartta.getBaaritiskit().get(a).getX() == i &&
+                            kartta.getBaaritiskit().get(a).getY() == j) {
+                        paintBaaritiski(g);
+                    }
+                }
                 //ihmisten tulostus
                 for (int k = 0; k < kartta.getHumans().size(); k++) {
                     if(kartta.getHumans().get(k).getX() == i && 
@@ -73,13 +80,7 @@ public class Naytto extends JPanel implements ActionListener{
                         paintTappelu(g);
                     }
                 }
-                //Baaritiskin tulostus
-                for (int a = 0; a < kartta.getBaaritiskit().size(); a++) {
-                    if (kartta.getBaaritiskit().get(a).getX() == i &&
-                            kartta.getBaaritiskit().get(a).getY() == j) {
-                        paintBaaritiski(g);
-                    }
-                }
+
                 //tuolien tulostus
                 for (int a = 0; a < kartta.getTuolit().size(); a++) {
                     if (kartta.getTuolit().get(a).getX() == i &&

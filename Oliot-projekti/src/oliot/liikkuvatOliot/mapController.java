@@ -30,7 +30,7 @@ public class mapController {
             fc.ihmistenLyönti();
         }
         
-        //map.fillTheBar();
+        map.fillTheBar();
         
         for (int i = 0; i < humans.size(); i++) {
             human = humans.get(i);
@@ -45,7 +45,6 @@ public class mapController {
             //timeToPee(human);
             //allOutOfPee(human);
             for (int j = 0; j < humans.size(); j++) {
-                System.out.println(human.getTavoite());
                 if (j!=i){
                     if(humans.get(i).getX() == humans.get(j).getX()){
                         if(humans.get(i).getY() == humans.get(j).getY()){
